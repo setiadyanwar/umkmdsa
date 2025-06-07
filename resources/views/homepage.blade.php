@@ -368,8 +368,8 @@
                         <div class="w-full h-full overflow-y-auto lg:overflow-x-auto p-4 hide-scrollbar">
                             <div class="flex flex-nowrap lg:flex-row gap-4 lg:gap-6 h-full lg:items-center ">
 
-
-                                        <div
+                                 {{-- product card --}}
+                                <div
                                     class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
                                     <div class="p-5 h-full flex flex-col">
                                         <div class="mb-6 flex justify-center">
@@ -395,7 +395,7 @@
                                 </div>
 
 
-                                        <div
+                                <div
                                     class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
                                     <div class="p-5 h-full flex flex-col">
                                         <div class="mb-6 flex justify-center">
@@ -421,7 +421,7 @@
                                 </div>
 
 
-                                        <div
+                                <div
                                     class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
                                     <div class="p-5 h-full flex flex-col">
                                         <div class="mb-6 flex justify-center">
@@ -447,7 +447,7 @@
                                 </div>
 
 
-                                        <div
+                                <div
                                     class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
                                     <div class="p-5 h-full flex flex-col">
                                         <div class="mb-6 flex justify-center">
@@ -473,7 +473,7 @@
                                 </div>
 
 
-                                        <div
+                                <div
                                     class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
                                     <div class="p-5 h-full flex flex-col">
                                         <div class="mb-6 flex justify-center">
