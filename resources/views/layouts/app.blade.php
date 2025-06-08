@@ -56,11 +56,13 @@
     </style>
 </head>
 
-<body class="font-lato text-white min-h-screen">
+<body class="flex flex-col min-h-screen font-lato text-black">
 
     @include('components.header')
 
-    @yield('content')
+    <div class="flex-grow">
+        @yield('content')
+    </div>
 
     @include('components.footer')
 
@@ -74,7 +76,7 @@
     <!-- Custom Script -->
     <script>
         window.addEventListener('load', () => {
-            (function () {
+            (function() {
                 const range = document.querySelector('#hs-pass-values-to-html-elements');
                 if (!range) return;
                 const rangeInstance = new HSRangeSlider(range);
@@ -89,17 +91,19 @@
         });
 
         document.querySelectorAll('.min-price, .max-price').forEach(input => {
-            input.addEventListener('change', function () {
+            input.addEventListener('change', function() {
                 if (parseInt(this.value) < 0) this.value = 0;
 
                 const minInput = document.querySelector('.min-price');
                 const maxInput = document.querySelector('.max-price');
 
-                if (this.classList.contains('min-price') && parseInt(this.value) > parseInt(maxInput.value)) {
+                if (this.classList.contains('min-price') && parseInt(this.value) > parseInt(maxInput
+                    .value)) {
                     this.value = maxInput.value;
                 }
 
-                if (this.classList.contains('max-price') && parseInt(this.value) < parseInt(minInput.value)) {
+                if (this.classList.contains('max-price') && parseInt(this.value) < parseInt(minInput
+                    .value)) {
                     this.value = minInput.value;
                 }
             });
