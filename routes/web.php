@@ -11,5 +11,15 @@ Route::get('/etalase', function () {
 })->name('etalase');
 
 Route::get('/umkm-binaan', function () {
-    return view('umkm.binaan');
-})->name('umkm.binaan');
+    return view('umkmbinaan');
+})->name('umkmbinaan');
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
+
+Route::get('/daftar-usaha', function () {
+    return view('daftar-usaha');
+})->name('daftarusaha');
+// Route::get('/daftar-usaha/{token}', 'DaftarUsahaController@showForm')->name('daftar-usaha.form');
+// Route::post('/daftar-usaha/{token}', 'DaftarUsahaController@submitForm')->name('daftar-usaha.submit');
