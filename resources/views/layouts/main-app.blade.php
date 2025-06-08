@@ -5,90 +5,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="current-route" content="{{ Route::currentRouteName() }}">
+
+    <!-- CSS Libraries -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
-    <title>Portal UMKM Binaan DSA - IPB</title>
+    <!-- Custom CSS and JS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <title>@yield('title', 'Portal UMKM Binaan DSA - IPB')</title>
+
+    <style>
+        .price-range-filter {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.75rem;
+        }
+
+        .range-input-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .price-label {
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+
+        .min-price,
+        .max-price {
+            width: 5rem;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .separator {
+            color: #6b7280;
+        }
+
+        /* Header background transitions */
+        #main-header {
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+    </style>
 </head>
 
 <body class="font-lato text-white min-h-screen">
 
-    {{-- @include('components.header') --}}
-
+    @include('components.header')
 
     @yield('content')
 
-
     @include('components.footer')
 
+    <!-- JS Libraries -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.8.1/nouislider.min.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Optional: local script, only if applicable -->
+    <script src="./node_modules/preline/dist/preline.js"></script>
 
+    <!-- Custom Script -->
+    <script>
+        window.addEventListener('load', () => {
+            (function () {
+                const range = document.querySelector('#hs-pass-values-to-html-elements');
+                if (!range) return;
+                const rangeInstance = new HSRangeSlider(range);
+                const min = document.querySelector('#hs-pass-values-to-html-elements-min-target');
+                const max = document.querySelector('#hs-pass-values-to-html-elements-max-target');
 
+                range.noUiSlider.on('update', (values) => {
+                    min.innerText = rangeInstance.formattedValue[0];
+                    max.innerText = rangeInstance.formattedValue[1];
+                });
+            })();
+        });
+
+        document.querySelectorAll('.min-price, .max-price').forEach(input => {
+            input.addEventListener('change', function () {
+                if (parseInt(this.value) < 0) this.value = 0;
+
+                const minInput = document.querySelector('.min-price');
+                const maxInput = document.querySelector('.max-price');
+
+                if (this.classList.contains('min-price') && parseInt(this.value) > parseInt(maxInput.value)) {
+                    this.value = maxInput.value;
+                }
+
+                if (this.classList.contains('max-price') && parseInt(this.value) < parseInt(minInput.value)) {
+                    this.value = minInput.value;
+                }
+            });
+        });
+    </script>
 
 </body>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="//unpkg.com/alpinejs" defer></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const track = document.getElementById('scrolling-track');
-        const cards = track.querySelectorAll('.animate-scroll');
-
-        // Pause animation on hover
-        track.addEventListener('mouseenter', () => {
-            cards.forEach(card => {
-                card.style.animationPlayState = 'paused';
-            });
-        });
-
-        // Resume animation when mouse leaves
-        track.addEventListener('mouseleave', () => {
-            cards.forEach(card => {
-                card.style.animationPlayState = 'running';
-            });
-        });
-    });
-    // const animatedElements = document.querySelectorAll('[data-animate="fade-up"]');
-
-    // const animateOnScroll = () => {
-    //     animatedElements.forEach(el => {
-    //         const rect = el.getBoundingClientRect();
-    //         const isVisible = rect.top < window.innerHeight - 50; // 50px sebelum muncul
-
-    //         if (isVisible) {
-    //             el.classList.add('opacity-100', 'translate-y-0');
-    //             el.classList.remove('opacity-0', 'translate-y-8');
-    //         }
-    //     });
-    // };
-
-    // window.addEventListener('scroll', animateOnScroll);
-    // window.addEventListener('load', animateOnScroll);
-    AOS.init();
-    document.addEventListener("DOMContentLoaded", function() {
-        const image = document.getElementById("fadeImage");
-
-        const observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        image.classList.remove("opacity-0", "scale-90");
-                        image.classList.add("opacity-100", "scale-100");
-                        observer.unobserve(image); // agar hanya animasi sekali
-                    }
-                });
-            }, {
-                threshold: 0.3
-            } // hanya animasi jika 30% elemen terlihat
-        );
-
-        if (image) {
-            observer.observe(image);
-        }
-    });
-</script>
 
 </html>

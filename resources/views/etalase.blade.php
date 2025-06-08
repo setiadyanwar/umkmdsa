@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@php
+    $currentRoute = 'etalase';
+@endphp
+
 @section('content')
     <!-- Header Section -->
-    <div class="flex justify-center items-center bg-white">
+    <div class="flex justify-center items-center bg-white pt-32">
         <!-- Banner -->
         <div class="relative w-[1292px] h-[321px] bg-cover bg-center rounded-lg overflow-hidden" style="background-image: url('{{ asset('images/header-etalase.png') }}');">
             <!-- Overlay Content -->

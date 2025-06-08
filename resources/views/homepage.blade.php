@@ -1,55 +1,15 @@
 @extends('layouts.main-app')
 
 @section('title', 'Portal UMKM Binaan DSA - IPB')
+@php
+    $currentRoute = 'homepage';
+@endphp
 
 @section('content')
-    <!-- Header & Navigation -->
-    <section class="bg-cover bg-center -mt-4" style="background-image: url('{{ asset('images/hero.png') }}' )">
-        <header class="relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
-                <!-- Navigation -->
-                <nav class="flex flex-row justify-between items-center py-10">
-
-                    <!-- Logo -->
-                    <img src="{{ asset('images/dpma-logo.png') }}" class="w-[253px] md:w-[253px] ml-5" alt="dpma-logo">
-                    <ul class="hidden md:flex flex-row space-x-8 lg:space-x-16">
-                        <li class="group">
-                            <a href="{{ route('homepage') }}"
-                                class="text-white border-b-2 border-transparent group-hover:border-blue-500 transition duration-300">
-                                Beranda
-                            </a>
-                        </li>
-                        <li class="group">
-                            <a href="{{ route('etalase') }}"
-                                class="text-white border-b-2 border-transparent group-hover:border-blue-500 transition duration-300">Etalase</a>
-                        </li>
-                        <li class="group">
-                            <a href="#"
-                                class="text-white border-b-2 border-transparent group-hover:border-blue-500 transition duration-300">UMKM
-                                Binaan</a>
-                        </li>
-                        {{-- <li class="group">
-                                <a href="#"
-                                    class="text-white border-b-2 border-transparent group-hover:border-blue-500 transition duration-300">Tentang
-                                    Kami</a>
-                            </li> --}}
-                    </ul>
-
-
-                    <button class="md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </nav>
-            </div>
-        </header>
-
-        {{-- Hero section --}}
-        <section class="pt-6 md:pt-10 pb-16 md:pb-24">
+    <!--Hero Section -->
+    <section class="bg-cover bg-center pt-24 " style="background-image: url('{{ asset('images/hero.png') }}' )">
+        <section class="pt-6 md:pt-25 pb-16 md:pb-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="w-full md:w-1/2">
@@ -324,7 +284,7 @@
 
     </section>
 
-    {{-- product highlight section --}}
+    {{-- Product Highlight Section --}}
     <section class="py-8 sm:py-12 max-w-7xl lg:py-14 mx-auto sm:px-6 mb-16">
         <div class="container mx-auto max-w-7xl">
             <!-- Header Section -->
@@ -334,169 +294,87 @@
                     <p class="text-gray-600 text-lg">Jelajahi berbagai produk UMKM terdaftar</p>
                     <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-[#113EA1] mt-3 rounded-full"></div>
                 </div>
-                <button
-                    class="border-2 border-[#113EA1] text-[#113EA1] px-6 py-3 rounded-3xl hover:bg-[#113EA1] hover:text-white transition-all duration-300 font-semibold">
+                <button class="border-2 border-[#113EA1] text-[#113EA1] px-6 py-3 rounded-3xl hover:bg-[#113EA1] hover:text-white transition-all duration-300 font-semibold">
                     Lihat Semua
                 </button>
             </div>
 
-
+            <!-- Main Content Container -->
             <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden">
-                <div class="flex flex-col lg:flex-row min-h-[400px] lg:h-[470px] ">
-
-                    <div class="w-full lg:w-80 h-64 sm:h-1/2 lg:h-full relative bg-[#113EA1] flex-shrink-0 ">
+                <div class="flex flex-col lg:flex-row min-h-[400px] lg:h-[470px]">
+                    
+                    <!-- Left Panel - CTA Section -->
+                    <div class="w-full lg:w-80 h-64 lg:h-full relative bg-[#113EA1] flex-shrink-0">
                         <div class="absolute inset-0 bg-white bg-opacity-30">
                             <img src="{{ asset('images/bg-display-product.png') }}" alt="UMKM Background"
-                                class="w-full h-full object-cover sm:object-contain md:object-none lg:object-cover">
+                                class="w-full h-full object-cover">
                         </div>
                         <div class="relative z-10 h-full flex flex-col justify-center px-6 lg:px-5">
-                            <div class="text-center lg:text-left lg:mb-12">
-                                <h2 class="text-white text-3xl sm:text-4xl font-bold leading-tight mb-2">500+
-                                    Produk
-                                    Terdaftar</h2>
+                            <div class="text-center lg:text-left">
+                                <h2 class="text-white text-3xl sm:text-4xl font-bold leading-tight mb-2">
+                                    500+ Produk Terdaftar
+                                </h2>
                                 <p class="text-white text-lg mb-6">Daftarkan usahamu sekarang juga!</p>
-                                <button
-                                    class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold shadow-md">
+                                <button class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold shadow-md">
                                     Daftar Disini
                                 </button>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="flex-1 h-auto lg:h-[500px] overflow-hidden hide-scrollbar px-4">
-                        <div class="w-full h-full overflow-y-auto lg:overflow-x-auto p-4 hide-scrollbar">
-                            <div class="flex flex-nowrap lg:flex-row gap-4 lg:gap-6 h-full lg:items-center ">
-
-                                 {{-- product card --}}
-                                <div
-                                    class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
+                    <!-- Right Panel - Products Scroll -->
+                    <div class="h-auto lg:h-full overflow-hidden">
+                        <!-- Mobile: Horizontal Scroll -->
+                        <div class="lg:hidden h-full p-4">
+                            <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" style="scroll-snap-type: x mandatory;">
+                                @for($i = 0; $i < 5; $i++)
+                                <div class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-72 hover:-translate-y-1 cursor-pointer" style="scroll-snap-align: start;">
                                     <div class="p-5 h-full flex flex-col">
-                                        <div class="mb-6 flex justify-center">
-                                            <div class="w-75 h-70 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
-                                                    class="w-full h-full object-cover" />
+                                        <div class="mb-4 flex justify-center">
+                                            <div class="w-full h-48 bg-gray-50 rounded-xl overflow-hidden">
+                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag" class="w-full h-full object-cover" />
                                             </div>
                                         </div>
                                         <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne
-                                                Rattan Bag</h3>
+                                            <h3 class="font-semibold text-gray-900 mb-2 text-base leading-tight">Celyne Rattan Bag</h3>
                                             <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                            <div class="flex items-center text-gray-400 text-xs">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                        clip-rule="evenodd"></path>
+                                            <div class="flex items-center text-gray-400 text-sm">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                                 </svg>
                                                 <span>Kabupaten Gowa</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                @endfor
+                            </div>
+                        </div>
 
-
-                                <div
-                                    class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
+                        <!-- Desktop: Vertical Scroll -->
+                        <div class="hidden lg:block w-full h-full overflow-y-auto p-4">
+                            <div class="flex gap-6 h-full items-center scrollbar-hide"  style="scroll-snap-type: x mandatory;">
+                                @for($i = 0; $i < 5; $i++)
+                                <div class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-80 h-[420px] hover:-translate-y-1 cursor-pointer">
                                     <div class="p-5 h-full flex flex-col">
                                         <div class="mb-6 flex justify-center">
-                                            <div class="w-75 h-70 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
-                                                    class="w-full h-full object-cover" />
+                                            <div class="w-full h-60 bg-gray-50 rounded-xl overflow-hidden">
+                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag" class="w-full h-full object-cover" />
                                             </div>
                                         </div>
                                         <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne
-                                                Rattan Bag</h3>
+                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne Rattan Bag</h3>
                                             <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
                                             <div class="flex items-center text-gray-400 text-xs">
                                                 <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                        clip-rule="evenodd"></path>
+                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                                                 </svg>
                                                 <span>Kabupaten Gowa</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div
-                                    class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
-                                    <div class="p-5 h-full flex flex-col">
-                                        <div class="mb-6 flex justify-center">
-                                            <div class="w-75 h-70 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
-                                                    class="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne
-                                                Rattan Bag</h3>
-                                            <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                            <div class="flex items-center text-gray-400 text-xs">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span>Kabupaten Gowa</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div
-                                    class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
-                                    <div class="p-5 h-full flex flex-col">
-                                        <div class="mb-6 flex justify-center">
-                                            <div class="w-75 h-70 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
-                                                    class="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne
-                                                Rattan Bag</h3>
-                                            <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                            <div class="flex items-center text-gray-400 text-xs">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span>Kabupaten Gowa</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div
-                                    class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
-                                    <div class="p-5 h-full flex flex-col">
-                                        <div class="mb-6 flex justify-center">
-                                            <div class="w-75 h-70 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
-                                                    class="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne
-                                                Rattan Bag</h3>
-                                            <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                            <div class="flex items-center text-gray-400 text-xs">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                                        clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span>Kabupaten Gowa</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endfor
                             </div>
                         </div>
                     </div>
@@ -504,6 +382,7 @@
             </div>
         </div>
     </section>
+
 
 
     {{-- Benefit section --}}
@@ -1108,5 +987,5 @@
             class="absolute bottom-[-20px] right-0 max-h-[380px] scale-110 object-contain z-20 pointer-events-none">
     </section>
 
-
+    
 @endsection

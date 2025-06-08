@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/etalase', function () {
     return view('etalase');
 })->name('etalase');
+
+Route::get('/umkm-binaan', function () {
+    return view('umkm.binaan');
+})->name('umkm.binaan');
