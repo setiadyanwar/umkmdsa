@@ -6,328 +6,418 @@
 
 @section('content')
     <!-- Header Section -->
-    <div class="flex justify-center items-center bg-white pt-32">
-        <!-- Banner -->
-        <div class="relative w-[1292px] h-[321px] bg-cover bg-center rounded-lg overflow-hidden" style="background-image: url('{{ asset('images/header-etalase.png') }}');">
-            <!-- Overlay Content -->
-            <div class="relative z-10 flex items-center justify-center h-full ">
-                <div class="text-center text-white px-4">
-                    <h1 class="text-3xl md:text-4xl font-bold mb-2">Etalase Produk UMKM</h1>
-                    <p class="text-base md:text-lg text-gray-200 max-w-xl mx-auto">
-                        Jelajahi produk unik berkualitas tinggi dari pengusaha lokal yang penuh dedikasi
-                    </p>
+    <div class="pt-32 bg-white">
+        <!-- Padding Container -->
+        <div class="px-4 sm:px-6 max-w-7xl mx-auto w-full">
+            <!-- Banner -->
+            <div class="relative h-[200px] sm:h-[250px] md:h-[300px] bg-cover bg-center rounded-lg overflow-hidden"
+                style="background-image: url('{{ asset('images/header-etalase.png') }}');">
+                <!-- Overlay Content -->
+                <div class="relative z-10 flex items-center justify-center h-full">
+                    <div class="text-center text-white px-4">
+                        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">Etalase Produk UMKM</h1>
+                        <p class="text-sm sm:text-base md:text-lg text-gray-200 max-w-xl mx-auto">
+                            Jelajahi produk unik berkualitas tinggi dari pengusaha lokal yang penuh dedikasi
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <div class="flex justify-center items-center bg-white mx-auto px-4 py-8 sm:py-12 md:py-16">
+        <div class="w-full max-w-7xl">
+            <!-- Mobile Filter Toggle Button -->
+            <button id="mobile-filter-toggle"
+                class="md:hidden w-full flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-100 p-3 mb-4">
+                <span class="text-lg font-semibold text-gray-900">Filter</span>
+                <svg class="w-5 h-5 transition-transform duration-300 " id="filter-icon"stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"></path>
+                </svg>
+            </button>
 
-    <div class="flex justify-center items-center bg-white mx-auto px-4 py-16">
-        <!-- Mobile Filter Toggle Button -->
-        <button id="mobile-filter-toggle"
-            class="md:hidden w-full flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-100 p-3 mb-4">
-            <span class="text-lg font-semibold text-gray-900">Filter</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-        </button>
-
-        <div class="flex flex-col md:flex-row gap-6">
-            <!-- Left Sidebar Filter -->
-            <div id="filter-sidebar" class="w-full md:w-72 flex-shrink-0 hidden md:block">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-3 sticky top-4">
-                    <!-- Filter Title -->
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">Filter</h3>
-                        <button id="reset-filter" class="text-sm text-blue-600 hover:text-blue-800">Reset</button>
-                    </div>
-
-                    <!-- Kategori (Accordion) -->
-                    <div class="mb-4  border-gray-100">
-                        <button
-                            class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3">
-                            <span>Kategori</span>
-                            <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                                </path>
-                            </svg>
-                        </button>
-                        <div class="accordion-content space-y-2">
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="kerajinan"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Kerajinan Kriya</span>
-                                <span class="ml-auto text-xs text-gray-400">(25)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="fashion"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Fashion & Aksesoris</span>
-                                <span class="ml-auto text-xs text-gray-400">(150)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="pertanian"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Pertanian & Perkebunan</span>
-                                <span class="ml-auto text-xs text-gray-400">(54)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="jasa"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Jasa</span>
-                                <span class="ml-auto text-xs text-gray-400">(47)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="seni"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Seni & Musik</span>
-                                <span class="ml-auto text-xs text-gray-400">(43)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="elektronik"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Komputer & Elektronik</span>
-                                <span class="ml-auto text-xs text-gray-400">(38)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="category" value="makanan"
-                                    class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
-                                <span class="text-sm text-gray-600">Makanan & Minuman</span>
-                                <span class="ml-auto text-xs text-gray-400">(15)</span>
-                            </label>
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Left Sidebar Filter -->
+                <div id="filter-sidebar"
+                    class="w-full md:w-72 flex-shrink-0 hidden md:block transition-all duration-300 ease-in-out">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sticky top-4">
+                        <!-- Filter Title -->
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Filter</h3>
+                            <button id="reset-filter" class="text-sm text-blue-600 hover:text-blue-800">Reset</button>
                         </div>
-                    </div>
 
-                    <!-- Harga Range (Accordion) -->
-                    <div class="mb-4">
-                        <button
-                            class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3">
-                            <span>Harga</span>
-                            <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                                </path>
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <label class="sr-only">Price range slider</label>
-                            <div id="hs-pass-values-to-html-elements" class="--prevent-on-load-init mb-3"
-                                data-hs-range-slider='{
-                                "start": [50, 1500],
-                                "range": {
-                                    "min": 0,
-                                    "max": 2000
-                                },
-                                "formatter": {
-                                    "type": "integer",
-                                    "thousandsSeparator": ","
-                                },
-                                "connect": true,
-                                "cssClasses": {
-                                    "target": "relative h-2 rounded-full bg-gray-200",
-                                    "base": "w-full h-full relative z-1",
-                                    "origin": "absolute top-0 end-0 w-full h-full origin-[0_0] rounded-full",
-                                    "handle": "absolute top-1/2 end-0 size-4 bg-white border-2 border-[#113EA1] rounded-full cursor-pointer translate-x-2/4 -translate-y-2/4 shadow-sm",
-                                    "connects": "relative z-0 w-full h-full rounded-full overflow-hidden",
-                                    "connect": "absolute top-0 end-0 z-1 w-full h-full bg-[#113EA1] origin-[0_0]",
-                                    "touchArea": "absolute -top-1 -bottom-1 -start-1 -end-1"
-                                }
-                            }'>
+                        <!-- Kategori (Accordion) -->
+                        <div class="mb-4 border-b border-gray-100 pb-4">
+                            <button
+                                class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3">
+                                <span>Kategori</span>
+                                <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7">
+                                    </path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="kerajinan"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Kerajinan Kriya</span>
+                                    <span class="ml-auto text-xs text-gray-400">(25)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="fashion"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Fashion & Aksesoris</span>
+                                    <span class="ml-auto text-xs text-gray-400">(150)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="pertanian"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Pertanian & Perkebunan</span>
+                                    <span class="ml-auto text-xs text-gray-400">(54)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="jasa"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Jasa</span>
+                                    <span class="ml-auto text-xs text-gray-400">(47)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="seni"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Seni & Musik</span>
+                                    <span class="ml-auto text-xs text-gray-400">(43)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="elektronik"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Komputer & Elektronik</span>
+                                    <span class="ml-auto text-xs text-gray-400">(38)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="category" value="makanan"
+                                        class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2">
+                                    <span class="text-sm text-gray-600">Makanan & Minuman</span>
+                                    <span class="ml-auto text-xs text-gray-400">(15)</span>
+                                </label>
                             </div>
+                        </div>
 
-                            <div class="flex justify-start items-center w-full">
-                                <span class="text-sm text-gray-600">Price:</span>
-                                <div class="flex items-center text-sm text-black ml-2">
-                                    <span id="hs-pass-values-to-html-elements-min-target">50</span>
-                                    <span class="mx-2">–</span>
-                                    <span id="hs-pass-values-to-html-elements-max-target">1,500</span>
+                        <!-- Harga Range (Accordion) -->
+                        <div class="mb-4 border-b border-gray-100 pb-4">
+                            <button
+                                class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3">
+                                <span>Harga</span>
+                                <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7">
+                                    </path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="mb-3 mt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-xs text-gray-500">Rp 0</span>
+                                        <span class="text-xs text-gray-500">Rp 2.000.000</span>
+                                    </div>
+                                    <div id="price-range-slider" class="h-2 bg-gray-200 rounded-full relative">
+                                        <div id="price-range-progress" class="absolute h-full bg-[#113EA1] rounded-full">
+                                        </div>
+                                        <input type="range" id="min-price-range" min="0" max="2000000"
+                                            value="50000"
+                                            class="price-slider absolute w-full h-2 opacity-0 cursor-pointer">
+                                        <input type="range" id="max-price-range" min="0" max="2000000"
+                                            value="1500000"
+                                            class="price-slider absolute w-full h-2 opacity-0 cursor-pointer">
+                                        <div id="min-price-handle"
+                                            class="absolute top-1/2 size-4 bg-white border-2 border-[#113EA1] rounded-full cursor-pointer -translate-y-2/4 shadow-sm">
+                                        </div>
+                                        <div id="max-price-handle"
+                                            class="absolute top-1/2 size-4 bg-white border-2 border-[#113EA1] rounded-full cursor-pointer -translate-y-2/4 shadow-sm">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between mt-6 mb-2">
+                                    <div class="relative w-[45%]">
+                                        <span class="absolute text-xs text-gray-500 -top-5">Min</span>
+                                        <input type="text" id="min-price-input"
+                                            class="w-full border border-gray-300 rounded-md px-2 py-1 text-sm"
+                                            value="50.000">
+                                    </div>
+                                    <span class="text-gray-400">-</span>
+                                    <div class="relative w-[45%]">
+                                        <span class="absolute text-xs text-gray-500 -top-5">Max</span>
+                                        <input type="text" id="max-price-input"
+                                            class="w-full border border-gray-300 rounded-md px-2 py-1 text-sm"
+                                            value="1.500.000">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Urutkan (Accordion) -->
+                        <div class="mb-4">
+                            <button
+                                class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3">
+                                <span>Urutkan</span>
+                                <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7">
+                                    </path>
+                                </svg>
+                            </button>
+                            <div class="accordion-content">
+                                <div class="flex flex-col gap-2">
+                                    <label
+                                        class="sort-option flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <input type="radio" name="sort" value="newest" class="hidden">
+                                        <div
+                                            class="w-4 h-4 rounded-full border border-gray-300 mr-2 flex items-center justify-center sort-radio">
+                                            <div class="w-2 h-2 rounded-full bg-[#113EA1] hidden sort-radio-dot"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-700">Terbaru</span>
+                                    </label>
+
+                                    <label
+                                        class="sort-option flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <input type="radio" name="sort" value="cheapest" class="hidden" checked>
+                                        <div
+                                            class="w-4 h-4 rounded-full border border-gray-300 mr-2 flex items-center justify-center sort-radio">
+                                            <div class="w-2 h-2 rounded-full bg-[#113EA1] hidden sort-radio-dot"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-700">Harga Terendah</span>
+                                    </label>
+
+                                    <label
+                                        class="sort-option flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <input type="radio" name="sort" value="expensive" class="hidden">
+                                        <div
+                                            class="w-4 h-4 rounded-full border border-gray-300 mr-2 flex items-center justify-center sort-radio">
+                                            <div class="w-2 h-2 rounded-full bg-[#113EA1] hidden sort-radio-dot"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-700">Harga Tertinggi</span>
+                                    </label>
+
+                                    <label
+                                        class="sort-option flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <input type="radio" name="sort" value="popular" class="hidden">
+                                        <div
+                                            class="w-4 h-4 rounded-full border border-gray-300 mr-2 flex items-center justify-center sort-radio">
+                                            <div class="w-2 h-2 rounded-full bg-[#113EA1] hidden sort-radio-dot"></div>
+                                        </div>
+                                        <span class="text-sm text-gray-700">Paling Populer</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Apply Filter Button -->
+                        <button id="apply-filter"
+                            class="w-full bg-[#113EA1] text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Terapkan Filter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Content Area -->
+                <div class="flex-1">
+                    <!-- Header with Search - New Design -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+                        <div>
+                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Produk UMKM</h1>
+                            <p class="text-gray-600" id="results-count">250+ hasil ditemukan</p>
+                        </div>
+                        <!-- Search Input -->
+                        <div class="relative w-full sm:w-auto sm:min-w-[300px]">
+                            <input type="text" id="search-input" placeholder="Jelajahi produk UMKM di sini"
+                                class="w-full border border-gray-300 rounded-full pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700 text-sm text-gray-900 placeholder-gray-400 bg-white" />
+
+                            <!-- Search Icon -->
+                            <svg class="absolute right-10 top-3.5 w-4 h-4 text-gray-400 pointer-events-none"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+
+                            <!-- Clear (X) Button -->
+                            <button id="clear-input"
+                                class="absolute right-3 top-3.5 w-4 h-4 text-gray-400 hover:text-red-500 hidden focus:outline-none"
+                                type="button">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- Urutkan (Accordion) -->
-                    <div class="mb-4">
-                        <button
-                            class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3">
-                            <span>Urutkan</span>
-                            <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                    <!-- Products Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8" id="products-grid">
+                        @php
+                            $products = [
+                                [
+                                    'id' => 1,
+                                    'name' => 'Celyne Rattan Bag',
+                                    'price' => 180000,
+                                    'location' => 'Kabupaten Gowa',
+                                    'image' => 'bag.png',
+                                    'category' => 'fashion',
+                                    'date' => '2023-05-15',
+                                    'popularity' => 95,
+                                ],
+                                [
+                                    'id' => 2,
+                                    'name' => 'Handmade Batik Shirt',
+                                    'price' => 250000,
+                                    'location' => 'Yogyakarta',
+                                    'image' => 'bag.png',
+                                    'category' => 'fashion',
+                                    'date' => '2023-06-20',
+                                    'popularity' => 87,
+                                ],
+                                [
+                                    'id' => 3,
+                                    'name' => 'Traditional Wooden Craft',
+                                    'price' => 120000,
+                                    'location' => 'Jepara',
+                                    'image' => 'bag.png',
+                                    'category' => 'kerajinan',
+                                    'date' => '2023-04-10',
+                                    'popularity' => 76,
+                                ],
+                                [
+                                    'id' => 4,
+                                    'name' => 'Organic Coffee Beans',
+                                    'price' => 85000,
+                                    'location' => 'Toraja',
+                                    'image' => 'bag.png',
+                                    'category' => 'makanan',
+                                    'date' => '2023-07-05',
+                                    'popularity' => 92,
+                                ],
+                                [
+                                    'id' => 5,
+                                    'name' => 'Silver Jewelry Set',
+                                    'price' => 320000,
+                                    'location' => 'Kotagede',
+                                    'image' => 'bag.png',
+                                    'category' => 'kerajinan',
+                                    'date' => '2023-03-25',
+                                    'popularity' => 88,
+                                ],
+                                [
+                                    'id' => 6,
+                                    'name' => 'Bamboo Handicraft',
+                                    'price' => 95000,
+                                    'location' => 'Tasikmalaya',
+                                    'image' => 'bag.png',
+                                    'category' => 'kerajinan',
+                                    'date' => '2023-06-30',
+                                    'popularity' => 79,
+                                ],
+                                [
+                                    'id' => 7,
+                                    'name' => 'Leather Wallet',
+                                    'price' => 150000,
+                                    'location' => 'Bandung',
+                                    'image' => 'bag.png',
+                                    'category' => 'fashion',
+                                    'date' => '2023-07-15',
+                                    'popularity' => 82,
+                                ],
+                                [
+                                    'id' => 8,
+                                    'name' => 'Ceramic Vase',
+                                    'price' => 200000,
+                                    'location' => 'Yogyakarta',
+                                    'image' => 'bag.png',
+                                    'category' => 'kerajinan',
+                                    'date' => '2023-05-20',
+                                    'popularity' => 75,
+                                ],
+                                [
+                                    'id' => 9,
+                                    'name' => 'Herbal Tea',
+                                    'price' => 45000,
+                                    'location' => 'Bogor',
+                                    'image' => 'bag.png',
+                                    'category' => 'makanan',
+                                    'date' => '2023-08-01',
+                                    'popularity' => 68,
+                                ],
+                            ];
+                        @endphp
+
+                        @foreach ($products as $product)
+                            <!-- Product Card -->
+                            <div class="product-card bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-full hover:-translate-y-1 cursor-pointer"
+                                data-id="{{ $product['id'] }}" data-name="{{ strtolower($product['name']) }}"
+                                data-price="{{ $product['price'] }}" data-category="{{ $product['category'] }}"
+                                data-date="{{ $product['date'] }}" data-popularity="{{ $product['popularity'] }}">
+                                <div class="p-4 h-full flex flex-col">
+                                    <div class="mb-4 flex justify-center">
+                                        <div class="w-full h-40 sm:h-48 bg-gray-50 rounded-xl overflow-hidden">
+                                            <img src="{{ asset('images/' . $product['image']) }}"
+                                                alt="{{ $product['name'] }}" class="w-full h-full object-cover" />
+                                        </div>
+                                    </div>
+                                    <div class="mt-auto">
+                                        <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">
+                                            {{ $product['name'] }}</h3>
+                                        <p class="text-[#113EA1] font-bold text-lg mb-3">Rp
+                                            {{ number_format($product['price'], 0, ',', '.') }}</p>
+                                        <div class="flex items-center text-gray-400 text-xs">
+                                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span>{{ $product['location'] }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-center items-center space-x-2 flex-wrap gap-2">
+                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
+                            id="prev-btn">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7">
                                 </path>
                             </svg>
                         </button>
-                        <div class="accordion-content flex flex-wrap gap-2 max-w-md mb-4">
-                            <!-- Termurah -->
-                            <label
-                                class="flex items-center cursor-pointer px-2 py-1 rounded-full border text-sm font-normal leading-tight whitespace-nowrap border-gray-300 text-[#113EA1] transition-all duration-200 has-[:checked]:border-[#113EA1] has-[:checked]:bg-blue-50  hover:border-[#113EA1]">
-                                <input type="radio" name="sort" value="cheapest" class="sr-only" checked>
-                                <span>Termurah</span>
-                            </label>
-
-                            <!-- Paling dicari -->
-                            <label
-                                class="flex items-center cursor-pointer px-2 py-1 rounded-full border text-sm font-normal leading-tight whitespace-nowrap border-gray-300 text-[#113EA1] transition-all duration-200 has-[:checked]:border-[#113EA1] has-[:checked]:bg-blue-50  hover:border-[#113EA1]">
-                                <input type="radio" name="sort" value="popular" class="sr-only">
-                                <span>Paling dicari</span>
-                            </label>
-
-                            <!-- Terlama -->
-                            <label
-                                class="flex items-center cursor-pointer px-2 py-1 rounded-full border text-sm font-normal leading-tight whitespace-nowrap border-gray-300 text-[#113EA1] transition-all duration-200 has-[:checked]:border-[#113EA1] has-[:checked]:bg-blue-50  hover:border-[#113EA1]">
-                                <input type="radio" name="sort" value="oldest" class="sr-only">
-                                <span>Terlama</span>
-                            </label>
-
-                            <!-- Terbaru -->
-                            <label
-                                class="flex items-center cursor-pointer px-2 py-1 rounded-full border text-sm font-normal leading-tight whitespace-nowrap border-gray-300 text-[#113EA1] transition-all duration-200 has-[:checked]:border-[#113EA1] has-[:checked]:bg-blue-50  hover:border-[#113EA1]">
-                                <input type="radio" name="sort" value="newest" class="sr-only">
-                                <span>Terbaru</span>
-                            </label>
-
-                            <!-- Termahal -->
-                            <label
-                                class="flex items-center cursor-pointer px-2 py-1 rounded-full border text-sm font-normal leading-tight whitespace-nowrap border-gray-300 text-[#113EA1] transition-all duration-200 has-[:checked]:border-[#113EA1] has-[:checked]:bg-blue-50  hover:border-[#113EA1]">
-                                <input type="radio" name="sort" value="expensive" class="sr-only">
-                                <span>Termahal</span>
-                            </label>
-                        </div>
+                        <button class="px-3 py-2 rounded-lg bg-[#113EA1] text-white page-btn active"
+                            data-page="1">1</button>
+                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
+                            data-page="2">2</button>
+                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
+                            data-page="3">3</button>
+                        <span class="px-2 text-gray-700">...</span>
+                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
+                            data-page="10">10</button>
+                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
+                            id="next-btn">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
-                </div>
-            </div>
-
-            <!-- Right Content Area -->
-            <div class="flex-1">
-                <!-- Top Bar with Search and Sort -->
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                    <div class="relative w-full sm:max-w-md flex-1">
-                        <input type="text" id="search-input" placeholder="Cari produk UMKM..."
-                            class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        <svg class="absolute left-3 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
-                    <div class="flex items-center space-x-4 w-full sm:w-auto">
-                        <span class="text-sm text-gray-600">Urutkan:</span>
-                        <select id="sort-select"
-                            class="w-full sm:w-auto border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="newest">Terbaru</option>
-                            <option value="cheapest">Harga Terendah</option>
-                            <option value="expensive">Harga Tertinggi</option>
-                            <option value="popular">Populer</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="products-grid">
-                    @php
-                        $products = [
-                            [
-                                'name' => 'Celyne Rattan Bag',
-                                'price' => 'Rp.180.000',
-                                'location' => 'Kabupaten Gowa',
-                                'image' => 'bag.png',
-                            ],
-                            [
-                                'name' => 'Handmade Batik Shirt',
-                                'price' => 'Rp.250.000',
-                                'location' => 'Yogyakarta',
-                                'image' => 'bag.png',
-                            ],
-                            [
-                                'name' => 'Traditional Wooden Craft',
-                                'price' => 'Rp.120.000',
-                                'location' => 'Jepara',
-                                'image' => 'bag.png',
-                            ],
-                            [
-                                'name' => 'Organic Coffee Beans',
-                                'price' => 'Rp.85.000',
-                                'location' => 'Toraja',
-                                'image' => 'bag.png',
-                            ],
-                            [
-                                'name' => 'Silver Jewelry Set',
-                                'price' => 'Rp.320.000',
-                                'location' => 'Kotagede',
-                                'image' => 'bag.png',
-                            ],
-                            [
-                                'name' => 'Bamboo Handicraft',
-                                'price' => 'Rp.95.000',
-                                'location' => 'Tasikmalaya',
-                                'image' => 'bag.png',
-                            ],
-                        ];
-                    @endphp
-
-                    @foreach ($products as $index => $product)
-                        <!-- Product Card {{ $index + 1 }} -->
-                        <div
-                        class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex-shrink-0 w-full lg:w-80 h-auto lg:h-[420px] hover:-translate-y-1 cursor-pointer">
-                        <div class="p-5 h-full flex flex-col">
-                            <div class="mb-6 flex justify-center">
-                                <div class="w-75 h-70 bg-gray-50 rounded-xl overflow-hidden">
-                                    <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
-                                        class="w-full h-full object-cover" />
-                                </div>
-                            </div>
-                            <div class="mt-auto">
-                                <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne
-                                    Rattan Bag</h3>
-                                <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                <div class="flex items-center text-gray-400 text-xs">
-                                    <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span>Kabupaten Gowa</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-
-                <!-- Pagination -->
-                <div class="flex justify-center items-center space-x-2 flex-wrap gap-2">
-                    <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
-                        id="prev-btn">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <button class="px-3 py-2 rounded-lg bg-[#113EA1] text-white page-btn active" data-page="1">1</button>
-                    <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
-                        data-page="2">2</button>
-                    <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
-                        data-page="3">3</button>
-                    <span class="px-2">...</span>
-                    <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
-                        data-page="10">10</button>
-                    <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
-                        id="next-btn">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                            </path>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Include HSRangeSlider CSS and JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/components/hs-range-slider.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/components/hs-range-slider.min.js"></script>
 
     <style>
         .accordion-content {
@@ -336,116 +426,253 @@
             transition: max-height 0.3s ease-out;
         }
 
-        /* Tambahkan padding untuk konten accordion harga */
+        /* Accordion content padding */
         .accordion-content {
             padding: 0 4px;
         }
 
-        /* Perbaikan tampilan range slider */
-        #hs-pass-values-to-html-elements {
-            margin-top: 12px;
-            margin-bottom: 16px;
+        /* Price range slider styling */
+        .price-slider {
+            -webkit-appearance: none;
+            pointer-events: none;
         }
 
-        /* Perbaikan tampilan text harga */
-        .accordion-content .flex.justify-start.items-center {
-            margin-top: 8px;
-            margin-bottom: 4px;
-            padding: 4px 0;
+        .price-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            pointer-events: auto;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #113EA1;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Custom radio button styling */
+        .sort-option input:checked+.sort-radio {
+            border-color: #113EA1;
+            background-color: #f0f7ff;
+        }
+
+        .sort-option input:checked+.sort-radio .sort-radio-dot {
+            display: block;
         }
     </style>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Store original products data
+            const originalProducts = Array.from(document.querySelectorAll('.product-card')).map(card => ({
+                element: card.cloneNode(true),
+                name: card.getAttribute('data-name'),
+                price: parseInt(card.getAttribute('data-price')),
+                category: card.getAttribute('data-category'),
+                date: new Date(card.getAttribute('data-date')),
+                popularity: parseInt(card.getAttribute('data-popularity'))
+            }));
+
             // Initialize accordion functionality
             const accordionButtons = document.querySelectorAll('.accordion-button');
 
-            // Tunggu range slider diinisialisasi sebelum membuka accordion
-            setTimeout(() => {
-                accordionButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const content = this.nextElementSibling;
-                        const icon = this.querySelector('.accordion-icon');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.accordion-icon');
 
-                        // Toggle content visibility
-                        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-                            content.style.maxHeight = '0px';
-                            icon.style.transform = 'rotate(0deg)';
-                        } else {
-                            content.style.maxHeight = content.scrollHeight + 'px';
-                            icon.style.transform = 'rotate(180deg)';
-                        }
-                    });
-
-                    // Kode untuk membuka accordion secara default
-                    const content = button.nextElementSibling;
-                    const icon = button.querySelector('.accordion-icon');
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.style.transform = 'rotate(180deg)';
-
-                    // Tambahkan penanganan khusus untuk accordion harga
-                    if (content.querySelector('#hs-pass-values-to-html-elements')) {
-                        // Recalculate height after range slider is fully initialized
-                        setTimeout(() => {
-                            content.style.maxHeight = content.scrollHeight + 'px';
-                        }, 300);
+                    // Toggle content visibility
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                        content.style.maxHeight = '0px';
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
                     }
                 });
-            }, 100);
+
+                // Open accordions by default
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.accordion-icon');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            });
 
             // Mobile filter toggle
             const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
             const filterSidebar = document.getElementById('filter-sidebar');
+            const filterIcon = document.getElementById('filter-icon');
 
             mobileFilterToggle.addEventListener('click', function() {
                 filterSidebar.classList.toggle('hidden');
+                if (filterSidebar.classList.contains('hidden')) {
+                    filterIcon.style.transform = 'rotate(0deg)';
+                } else {
+                    filterIcon.style.transform = 'rotate(180deg)';
+                }
             });
 
-            // Initialize HSRangeSlider
-            window.addEventListener('load', () => {
-                (function() {
-                    const range = document.querySelector('#hs-pass-values-to-html-elements');
-                    if (range && typeof HSRangeSlider !== 'undefined') {
-                        const rangeInstance = new HSRangeSlider(range);
-                        const min = document.querySelector(
-                            '#hs-pass-values-to-html-elements-min-target');
-                        const max = document.querySelector(
-                            '#hs-pass-values-to-html-elements-max-target');
+            // Price range slider functionality
+            const minPriceRange = document.getElementById('min-price-range');
+            const maxPriceRange = document.getElementById('max-price-range');
+            const minPriceHandle = document.getElementById('min-price-handle');
+            const maxPriceHandle = document.getElementById('max-price-handle');
+            const priceRangeProgress = document.getElementById('price-range-progress');
+            const minPriceInput = document.getElementById('min-price-input');
+            const maxPriceInput = document.getElementById('max-price-input');
 
-                        if (range.noUiSlider) {
-                            range.noUiSlider.on('update', (values, handle) => {
-                                if (rangeInstance.formattedValue) {
-                                    min.textContent = rangeInstance.formattedValue[0];
-                                    max.textContent = rangeInstance.formattedValue[1];
-                                }
-                            });
-                        }
+            // Format number to currency
+            function formatCurrency(value) {
+                return new Intl.NumberFormat('id-ID').format(value);
+            }
 
-                        // Initialize values on load
-                        if (rangeInstance.formattedValue) {
-                            min.textContent = rangeInstance.formattedValue[0];
-                            max.textContent = rangeInstance.formattedValue[1];
-                        }
-                    }
-                })();
+            // Parse currency string to number
+            function parseCurrency(value) {
+                return parseInt(value.replace(/\D/g, ''));
+            }
+
+            // Update slider positions and progress bar
+            function updateSlider() {
+                const minVal = parseInt(minPriceRange.value);
+                const maxVal = parseInt(maxPriceRange.value);
+
+                const percent1 = (minVal / parseInt(minPriceRange.max)) * 100;
+                const percent2 = (maxVal / parseInt(maxPriceRange.max)) * 100;
+
+                minPriceHandle.style.left = `${percent1}%`;
+                maxPriceHandle.style.left = `${percent2}%`;
+                priceRangeProgress.style.left = `${percent1}%`;
+                priceRangeProgress.style.width = `${percent2 - percent1}%`;
+
+                minPriceInput.value = formatCurrency(minVal);
+                maxPriceInput.value = formatCurrency(maxVal);
+            }
+
+            // Initialize slider
+            updateSlider();
+
+            // Event listeners for range inputs
+            minPriceRange.addEventListener('input', function() {
+                const minVal = parseInt(minPriceRange.value);
+                const maxVal = parseInt(maxPriceRange.value);
+
+                if (minVal > maxVal - 50000) {
+                    minPriceRange.value = maxVal - 50000;
+                }
+
+                updateSlider();
+            });
+
+            maxPriceRange.addEventListener('input', function() {
+                const minVal = parseInt(minPriceRange.value);
+                const maxVal = parseInt(maxPriceRange.value);
+
+                if (maxVal < minVal + 50000) {
+                    maxPriceRange.value = minVal + 50000;
+                }
+
+                updateSlider();
+            });
+
+            // Event listeners for text inputs
+            minPriceInput.addEventListener('change', function() {
+                let value = parseCurrency(this.value);
+                const maxVal = parseInt(maxPriceRange.value);
+
+                if (isNaN(value)) value = 0;
+                if (value < 0) value = 0;
+                if (value > parseInt(minPriceRange.max)) value = parseInt(minPriceRange.max);
+                if (value > maxVal - 50000) value = maxVal - 50000;
+
+                minPriceRange.value = value;
+                updateSlider();
+            });
+
+            maxPriceInput.addEventListener('change', function() {
+                let value = parseCurrency(this.value);
+                const minVal = parseInt(minPriceRange.value);
+
+                if (isNaN(value)) value = parseInt(maxPriceRange.max);
+                if (value > parseInt(maxPriceRange.max)) value = parseInt(maxPriceRange.max);
+                if (value < minVal + 50000) value = minVal + 50000;
+
+                maxPriceRange.value = value;
+                updateSlider();
+            });
+
+            // Custom radio buttons for sort options
+            const sortOptions = document.querySelectorAll('.sort-option');
+            sortOptions.forEach(option => {
+                const radio = option.querySelector('input[type="radio"]');
+                if (radio.checked) {
+                    option.classList.add('bg-blue-50');
+                }
+
+                option.addEventListener('click', function() {
+                    sortOptions.forEach(opt => opt.classList.remove('bg-blue-50'));
+                    this.classList.add('bg-blue-50');
+
+                    // Apply sorting
+                    applyFilters();
+                });
             });
 
             // Reset filter functionality
             document.getElementById('reset-filter').addEventListener('click', function() {
-                document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
-                document.getElementById('search-input').value = '';
-                document.getElementById('sort-select').value = 'newest';
+                // Reset category filters
+                document.querySelectorAll('input[name="category"]').forEach(radio => radio.checked = false);
 
-                // Reset range slider
-                const range = document.querySelector('#hs-pass-values-to-html-elements');
-                if (range && range.noUiSlider) {
-                    range.noUiSlider.set([50, 1500]);
-                }
+                // Reset price range
+                minPriceRange.value = 50000;
+                maxPriceRange.value = 1500000;
+                updateSlider();
+
+                // Reset sort
+                document.querySelectorAll('input[name="sort"]').forEach(radio => {
+                    radio.checked = radio.value === 'cheapest';
+                });
+
+                // Reset sort option styling
+                sortOptions.forEach(opt => opt.classList.remove('bg-blue-50'));
+                sortOptions[1].classList.add('bg-blue-50');
+
+                // Reset search
+                document.getElementById('search-input').value = '';
+
+                // Apply reset filters
+                applyFilters();
+            });
+
+            // Apply filter button
+            document.getElementById('apply-filter').addEventListener('click', function() {
+                applyFilters();
+            });
+
+            // Search functionality with debounce
+            const searchInput = document.getElementById('search-input');
+            let searchTimeout;
+
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    applyFilters();
+                }, 300);
+            });
+
+            // Category filter functionality
+            document.querySelectorAll('input[name="category"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    applyFilters();
+                });
             });
 
             // Pagination functionality
-            document.querySelectorAll('.page-btn').forEach(btn => {
+            const pageButtons = document.querySelectorAll('.page-btn');
+            const prevButton = document.getElementById('prev-btn');
+            const nextButton = document.getElementById('next-btn');
+
+            pageButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    document.querySelectorAll('.page-btn').forEach(b => {
+                    pageButtons.forEach(b => {
                         b.classList.remove('bg-[#113EA1]', 'text-white', 'active');
                         b.classList.add('border', 'border-gray-300', 'text-gray-700',
                             'hover:bg-gray-50');
@@ -456,60 +683,114 @@
                 });
             });
 
-            // Search functionality
-            document.getElementById('search-input').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                const productCards = document.querySelectorAll('.product-card');
+            prevButton.addEventListener('click', function() {
+                const activePage = document.querySelector('.page-btn.active');
+                const prevPage = activePage.previousElementSibling;
+                if (prevPage && prevPage.classList.contains('page-btn')) {
+                    prevPage.click();
+                }
+            });
 
-                productCards.forEach(card => {
-                    const productName = card.querySelector('h3').textContent.toLowerCase();
-                    if (productName.includes(searchTerm)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
+            nextButton.addEventListener('click', function() {
+                const activePage = document.querySelector('.page-btn.active');
+                const nextPage = activePage.nextElementSibling;
+                if (nextPage && nextPage.classList.contains('page-btn')) {
+                    nextPage.click();
+                }
+            });
+
+            // Filter and sort products
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const selectedCategory = document.querySelector('input[name="category"]:checked')?.value || '';
+                const minPrice = parseInt(minPriceRange.value);
+                const maxPrice = parseInt(maxPriceRange.value);
+                const sortBy = document.querySelector('input[name="sort"]:checked')?.value || 'cheapest';
+
+                let filteredProducts = originalProducts.filter(product => {
+                    // Search filter
+                    if (searchTerm && !product.name.includes(searchTerm)) {
+                        return false;
+                    }
+
+                    // Category filter
+                    if (selectedCategory && product.category !== selectedCategory) {
+                        return false;
+                    }
+
+                    // Price range filter
+                    if (product.price < minPrice || product.price > maxPrice) {
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                // Sort products
+                filteredProducts.sort((a, b) => {
+                    switch (sortBy) {
+                        case 'cheapest':
+                            return a.price - b.price;
+                        case 'expensive':
+                            return b.price - a.price;
+                        case 'newest':
+                            return b.date - a.date;
+                        case 'popular':
+                            return b.popularity - a.popularity;
+                        default:
+                            return a.price - b.price;
                     }
                 });
-            });
 
-            // Category filter functionality
-            document.querySelectorAll('input[name="category"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.checked) {
-                        // Here you can add logic to filter products by category
-                        console.log('Selected category:', this.value);
-                    }
-                });
-            });
+                // Update display
+                const productsGrid = document.getElementById('products-grid');
+                const resultsCount = document.getElementById('results-count');
 
-            // Sort filter functionality
-            document.querySelectorAll('input[name="sort"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.checked) {
-                        // Sync with dropdown
-                        document.getElementById('sort-select').value = this.value;
-                        // Here you can add logic to sort products
-                        console.log('Selected sort:', this.value);
-                    }
-                });
-            });
+                // Clear current products
+                productsGrid.innerHTML = '';
 
-            // Sync dropdown with radio buttons
-            document.getElementById('sort-select').addEventListener('change', function() {
-                const sortValue = this.value;
-                document.querySelectorAll('input[name="sort"]').forEach(radio => {
-                    radio.checked = radio.value === sortValue;
-                });
-            });
+                if (filteredProducts.length === 0) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'col-span-full text-center py-12';
+                    noResults.innerHTML = `
+                        <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p class="text-gray-500 text-lg mb-4">Tidak ada produk yang sesuai dengan pencarian Anda</p>
+                        <button id="clear-filters" class="text-blue-600 hover:text-blue-800 font-medium">Hapus semua filter</button>
+                    `;
+                    productsGrid.appendChild(noResults);
+
+                    // Update results count
+                    resultsCount.textContent = '0 hasil ditemukan';
+
+                    // Add event listener for clear filters button
+                    document.getElementById('clear-filters').addEventListener('click', function() {
+                        document.getElementById('reset-filter').click();
+                    });
+                } else {
+                    // Add filtered products to grid
+                    filteredProducts.forEach(product => {
+                        const clonedElement = product.element.cloneNode(true);
+                        productsGrid.appendChild(clonedElement);
+                    });
+
+                    // Update results count
+                    resultsCount.textContent = `${filteredProducts.length} hasil ditemukan`;
+                }
+            }
 
             // Handle window resize for responsive sidebar
             window.addEventListener('resize', function() {
                 if (window.innerWidth >= 768) { // md breakpoint
                     filterSidebar.classList.remove('hidden');
-                    filterSidebar.classList.add('block');
-                } else {
+                } else if (!filterSidebar.classList.contains('hidden')) {
                     filterSidebar.classList.add('hidden');
                 }
             });
+
+            // Initialize with default filters
+            applyFilters();
         });
     </script>
 @endsection
