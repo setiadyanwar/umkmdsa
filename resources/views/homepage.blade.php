@@ -8,7 +8,7 @@
 @section('content')
 
     <!--Hero Section -->
-    <section class="bg-cover bg-center pt-24 " style="background-image: url('{{ asset('images/hero.png') }}' )">
+    <section class="bg-cover bg- bg-center pt-24 " style="background-image: url('{{ asset('images/hero.png') }}' )">
         <section class="pt-6 md:pt-25 pb-16 md:pb-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
                 <div class="flex flex-col md:flex-row gap-8">
@@ -19,7 +19,7 @@
                             Tumbuh Bersama<br>
                             Teknologi & Inovasi
                         </h1>
-                        <p class="text-gray-300 mb-6 md:mb-8 text-sm md:text-base">
+                        <p class="text-gray-300 mb-8 md:mb-16 text-sm md:text-base">
                             Portal resmi UMKM binaan DSA - IPB. Temukan produk unggulan, kisah
                             inspiratif, dan peluang kolaborasi untuk pertumbuhan usaha yang
                             berkelanjutan.
@@ -70,7 +70,7 @@
 
         <!-- Programs Section -->
         <section
-            class="relative py-16 md:py-20 bg-linear-to-t from-[#04112F] via-[#04112F] to-transparent bg-gradient-to-b from-transparent to-white">
+            class="relative py-16 md:py-20 bg-linear-to-t from-[#04112F] via-[#04112F] to-transparent bg-gradient-to-b to-white">
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 z-20">
                 <div class="text-center mb-12">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-white">Program Pelatihan
@@ -315,7 +315,7 @@
                                     500+ Produk Terdaftar
                                 </h2>
                                 <p class="text-white text-lg mb-6">Daftarkan usahamu sekarang juga!</p>
-                                <button class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold shadow-md">
+                                <button class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold cursor-pointer">
                                     Daftar Disini
                                 </button>
                             </div>
@@ -424,7 +424,7 @@
 
     {{-- testimoni section --}}
     <section class="relative w-full bg-white overflow-hidden max-w-7xl mx-auto sm:px-6 py-12 sm:py-16 lg:py-20">
-        <div class="max-w-6xl mx-auto">
+        <div class="w-full mx-auto">
             <div class="px-4">
                 <!-- Title -->
                 <h2 class="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-800 text-center mb-8 md:mb-12">
