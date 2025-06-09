@@ -68,4 +68,4 @@
             <div class="border-t border-white mt-8 pt-4 text-center text-sm">
                 © 2025 UmkmDSA | Powered by UmkmDSA
             </div>
-        </footer>
+</footer>

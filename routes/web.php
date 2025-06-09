@@ -10,6 +10,7 @@ Route::get('/etalase', function () {
     return view('etalase');
 })->name('etalase');
 
+
 Route::get('/umkm-binaan', function () {
     return view('umkmbinaan');
 })->name('umkmbinaan');
@@ -23,3 +24,8 @@ Route::get('/daftar-usaha', function () {
 })->name('daftarusaha');
 // Route::get('/daftar-usaha/{token}', 'DaftarUsahaController@showForm')->name('daftar-usaha.form');
 // Route::post('/daftar-usaha/{token}', 'DaftarUsahaController@submitForm')->name('daftar-usaha.submit');
+
+Route::get('/product', function () {
+    return view('single-product');
+})->name('singleview');
+

@@ -3,18 +3,18 @@
     data-page="{{ $currentRoute ?? Route::currentRouteName() }}">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <nav class="flex flex-row justify-between items-center py-6 transition-all duration-300 ease-in-out">
-            <img id="nav-logo" 
+            <img id="nav-logo"
                 src="{{ asset('images/dpma-logo.png') }}"
                 data-default-logo="{{ asset('images/dpma-logo.png') }}"
                 data-dark-logo="{{ asset('images/dpma-logo-dark.png') }}"
-                class="w-[200px] md:w-[253px] transition-all duration-300 ease-in-out" 
+                class="w-[200px] md:w-[253px] transition-all duration-300 ease-in-out"
                 alt="dpma-logo">
 
             <ul class="hidden md:flex flex-row space-x-8 lg:space-x-16">
                 @foreach ([
                     'homepage' => 'Beranda',
                     'etalase' => 'Etalase',
-                    'umkm.binaan' => 'UMKM Binaan',
+                    'umkmbinaan' => 'UMKM Binaan',
                 ] as $route => $label)
                     <li class="group relative">
                         <a href="{{ route($route) }}"
@@ -42,7 +42,7 @@
                 @foreach ([
                     'homepage' => 'Beranda',
                     'etalase' => 'Etalase',
-                    'umkm.binaan' => 'UMKM Binaan',
+                    'umkmbinaan' => 'UMKM Binaan',
                 ] as $route => $label)
                     <li class="group">
                         <a href="{{ route($route) }}"
