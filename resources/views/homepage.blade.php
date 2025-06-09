@@ -302,7 +302,7 @@
             <!-- Main Content Container -->
             <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden">
                 <div class="flex flex-col lg:flex-row min-h-[400px] lg:h-[470px]">
-                    
+
                     <!-- Left Panel - CTA Section -->
                     <div class="w-full lg:w-80 h-64 lg:h-full relative bg-[#113EA1] flex-shrink-0">
                         <div class="absolute inset-0 bg-white bg-opacity-30">
@@ -987,5 +987,5 @@
             class="absolute bottom-[-20px] right-0 max-h-[380px] scale-110 object-contain z-20 pointer-events-none">
     </section>
 
-    
+
 @endsection
