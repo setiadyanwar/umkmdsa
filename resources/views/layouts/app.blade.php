@@ -72,6 +72,7 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <!-- Optional: local script, only if applicable -->
     <script src="./node_modules/preline/dist/preline.js"></script>
+    
 
     <!-- Custom Script -->
     <script>

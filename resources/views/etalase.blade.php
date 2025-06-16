@@ -388,29 +388,25 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="flex justify-center items-center space-x-2 flex-wrap gap-2">
-                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
-                            id="prev-btn">
+                    <div class="flex justify-center items-center space-x-2 mb-12">
+                        <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7">
-                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </button>
-                        <button class="px-3 py-2 rounded-lg bg-[#113EA1] text-white page-btn active"
-                            data-page="1">1</button>
-                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
-                            data-page="2">2</button>
-                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
-                            data-page="3">3</button>
-                        <span class="px-2 text-gray-700">...</span>
-                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 page-btn"
-                            data-page="10">10</button>
-                        <button class="px-3 py-2 rounded-lg border border-gray-300 text-gray-500 hover:bg-gray-50"
-                            id="next-btn">
+
+                        @for($i = 1; $i <= 5; $i++)
+                            <button class="w-8 h-8 rounded-full {{ $i === 2 ? 'bg-[#113EA1] text-white' : 'border border-gray-300 hover:bg-gray-50' }} flex items-center justify-center text-sm">
+                                {{ $i }}
+                            </button>
+                        @endfor
+
+                        <span class="text-gray-400">...</span>
+                        <button class="w-8 h-8 rounded-full border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-sm">21</button>
+
+                        <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                         </button>
                     </div>
@@ -460,7 +456,7 @@
         }
     </style>
 
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Store original products data
             const originalProducts = Array.from(document.querySelectorAll('.product-card')).map(card => ({
@@ -792,5 +788,7 @@
             // Initialize with default filters
             applyFilters();
         });
-    </script>
+    </script> --}}
+
+    <script src="{{ asset('js/filter.js') }}" defer></script>
 @endsection

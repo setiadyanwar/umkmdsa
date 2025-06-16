@@ -29,3 +29,6 @@ Route::get('/product', function () {
     return view('single-product');
 })->name('singleview');
 
+Route::get('/profile', function () {
+    return view('profile-store.main-profile');
+})->name('main-profile');

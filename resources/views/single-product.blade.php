@@ -6,23 +6,26 @@
 @endphp
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 py-8">
+<div class="max-w-7xl mx-auto px-4 py-28">
         <!-- Breadcrumb -->
-        <div class="pt-20 bg-white mb-14">
-            <div class="px-4 py-4">
-                <nav class="text-sm text-[#C3C3C3] flex items-center space-x-2">
-                    <a href="#" class="hover:text-[#113EA1] transition-colors">Beranda</a>
-                    <svg class="w-4 h-4 text-[#C3C3C3] " fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                    <a href="#" class="hover:text-[#113EA1] transition-colors">Tas & Aksesoris</a>
-                    <svg class="w-4 h-4 text-[#C3C3C3] " fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                    <span class="text-gray-800 font-medium">Celyne Rattan Bag</span>
+        <div class="bg-white mb-14">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <nav class="text-sm text-gray-500 flex items-center space-x-2" aria-label="Breadcrumb">
+                    <a href="#" class="hover:text-[#113EA1] transition-colors duration-200 font-medium">
+                    Beranda
+                    </a>
+                    <span class="text-gray-400 mx-2">/</span>
+                    <a href="#" class="hover:text-[#113EA1] transition-colors duration-200 font-medium">
+                    Tas & Aksesoris
+                    </a>
+                    <span class="text-gray-400 mx-2">/</span>
+                    <span class="text-gray-800 font-semibold" aria-current="page">
+                    Celyne Rattan Bag
+                    </span>
                 </nav>
             </div>
         </div>
+
 
         <!-- Product Detail Section -->
         <div class="grid lg:grid-cols-2 gap-12 mb-16">
@@ -31,10 +34,7 @@
                 <!-- Main Image -->
                 <div class="bg-white rounded-2xl p-6 relative overflow-hidden">
                     <div class="relative">
-                        <span
-                            class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
-                            PROMO 18%
-                        </span>
+
 
                         <img id="main-image" src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag"
                             class="w-full h-115 object-cover rounded-xl cursor-zoom-in transition-transform hover:scale-105">
