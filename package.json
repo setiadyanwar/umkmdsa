@@ -10,7 +10,14 @@
         "axios": "^1.8.2",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.2.0",
-        "tailwindcss": "^4.0.0",
+        "tailwindcss": "^4.1.8",
         "vite": "^6.2.4"
+    },
+    "dependencies": {
+        "@tailwindcss/postcss": "^4.1.8",
+        "nouislider": "^15.8.1",
+        "postcss": "^8.5.4",
+        "preline": "^3.1.0",
+        "tailwind-scrollbar-hide": "^4.0.0"
     }
 }
