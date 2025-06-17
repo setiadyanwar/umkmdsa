@@ -22,6 +22,7 @@ use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends Resource
 {
@@ -125,11 +126,20 @@ class ProductResource extends Resource
                             ->maxFiles(5)
                             ->reorderable()
                             ->appendFiles()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                null,
+                                '1:1',
+                            ])
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('1:1')
+                            ->imageResizeTargetWidth('1080')
+                            ->imageResizeTargetHeight('1080')
                             ->panelLayout('grid')
                             ->storeFiles()
                             ->maxSize(2048)
                             ->label('Upload Gambar')
-                            ->helperText('Max 5 gambar. Seret gambar untuk mengubah urutan. Gambar pertama akan menjadi gambar utama.')
+                            ->helperText('Max 5 gambar, disarankan 1:1. Seret gambar untuk mengubah urutan. Gambar pertama akan menjadi gambar utama.')
                             ->afterStateHydrated(function (FileUpload $component) {
                                 $record = $component->getRecord();
 
@@ -236,25 +246,26 @@ class ProductResource extends Resource
     {
         $images = $form->getState()['images'] ?? [];
 
-        // Ambil data gambar lama dari DB, key by image_url biar gampang akses
+        // Ambil data gambar lama dari DB, key by image_url
         $existingImages = $record->images->keyBy('image_url');
 
-        // Hapus gambar yang sudah gak ada di form
-        $record->images()
-            ->whereNotIn('image_url', $images)
-            ->delete();
+        // Cari gambar yang tidak ada di form
+        $deletedImages = $existingImages->keys()->diff($images);
 
-        // Iterasi gambar di form, insert baru atau update urutan & is_primary
+        // Hapus dari storage dan database
+        foreach ($deletedImages as $imageUrl) {
+            Storage::disk('public')->delete($imageUrl);
+            $record->images()->where('image_url', $imageUrl)->delete();
+        }
+
+        // Simpan/update gambar baru
         foreach ($images as $index => $imagePath) {
             if ($existingImages->has($imagePath)) {
-                // Update order & is_primary untuk gambar yang sudah ada
-                $existingImage = $existingImages->get($imagePath);
-                $existingImage->update([
+                $existingImages->get($imagePath)->update([
                     'order' => $index + 1,
                     'is_primary' => $index === 0,
                 ]);
             } else {
-                // Insert gambar baru
                 $record->images()->create([
                     'image_url' => $imagePath,
                     'is_primary' => $index === 0,

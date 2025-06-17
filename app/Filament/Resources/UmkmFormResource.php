@@ -61,6 +61,16 @@ class UmkmFormResource extends Resource
                                 ->directory('form_logos')
                                 ->nullable()
                                 ->maxSize(2048)
+                                ->avatar()
+                                ->imageEditor()
+                                ->imageEditorAspectRatios([
+                                    null,
+                                    '1:1',
+                                ])
+                                ->imageResizeMode('cover')
+                                ->imageCropAspectRatio('1:1')
+                                ->imageResizeTargetWidth('1080')
+                                ->imageResizeTargetHeight('1080')
                                 ->helperText('Opsional. Logo dari usaha.'),
 
                             Select::make('category_id')

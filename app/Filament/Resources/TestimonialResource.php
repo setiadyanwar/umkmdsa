@@ -68,9 +68,16 @@ class TestimonialResource extends Resource
                             ->label('Foto Profil')
                             ->image()
                             ->directory('testimonials')
-                            ->imagePreviewHeight('150')
-                            ->imageCropAspectRatio('1:1')
+                            ->avatar()
                             ->imageEditor()
+                            ->imageEditorAspectRatios([
+                                null,
+                                '1:1',
+                            ])
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('1:1')
+                            ->imageResizeTargetWidth('1080')
+                            ->imageResizeTargetHeight('1080')
                             ->nullable()
                             ->helperText('Opsional. Gambar akan ditampilkan sebagai avatar testimonial.'),
 
