@@ -1,0 +1,36 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\UmkmCategory;
+use DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Str;
+
+class UmkmCategorySeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $categories = [
+            ['id' => 1, 'name' => 'Fashion'],
+            ['id' => 2, 'name' => 'Kerajinan Kriya'],
+            ['id' => 3, 'name' => 'Jasa'],
+            ['id' => 4, 'name' => 'Kesehatan dan Kecantikan'],
+            ['id' => 5, 'name' => 'Handphone & Aksesoris'],
+        ];
+
+        foreach ($categories as $category) {
+            UmkmCategory::updateOrCreate(
+                ['id' => $category['id']],
+                [
+                    'name' => $category['name'],
+                    'slug' => Str::slug($category['name']),
+                ]
+            );
+        }
+    }
+}

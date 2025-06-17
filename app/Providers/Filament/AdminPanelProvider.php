@@ -25,6 +25,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('UMKM DSA')
             ->id('admin')
             ->path('admin')
             ->login()

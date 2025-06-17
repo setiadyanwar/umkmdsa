@@ -5,10 +5,10 @@
 @endphp
 
 @section('content')
-<!-- Header Section -->
+    <!-- Header Section -->
     <div class="pt-32 bg-white">
         <!-- Padding Container -->
-        <div class="px-4 sm:px-6 max-w-7xl mx-auto w-full">
+        <div class="max-w-7xl mx-auto w-full px-4 sm:px-6">
             <!-- Banner -->
             <div class="relative h-[200px] sm:h-[250px] md:h-[300px] bg-cover bg-center rounded-lg overflow-hidden"
                 style="background-image: url('{{ asset('images/header-etalase.png') }}');">
@@ -25,129 +25,205 @@
         </div>
     </div>
 
-<!-- Main Content -->
-<section class="py-12 sm:py-16 lg:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Sidebar -->
-            <div class="lg:w-1/4">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-4">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Semua UMKM</h3>
-                    
-                    <!-- Category Filter -->
-                    <div class="space-y-3">
-                        <div class="text-sm text-gray-600 mb-2">Portfolio 13650 foto</div>
-                        
-                        <!-- Alphabet Filter -->
-                        <div class="flex flex-wrap gap-1 mb-4">
-                            @foreach(range('A', 'Z') as $letter)
-                                <button class="w-8 h-8 text-xs border border-gray-300 rounded hover:bg-blue-50 hover:border-blue-300 transition-colors {{ $letter === 'A' ? 'bg-blue-50 border-blue-300 text-blue-600' : 'text-gray-600' }}">
-                                    {{ $letter }}
+    <div class="flex justify-center items-center bg-white mx-auto px-4 py-8 sm:py-12 md:py-16">
+            <div class="w-full max-w-7xl">
+                <!-- Mobile Filter Toggle Button -->
+                <button type="button" id="mobile-filter-toggle"
+                    class="md:hidden w-full flex items-center justify-between bg-white rounded-xl shadow-sm border border-gray-100 p-3 mb-4 hover:bg-gray-50 transition-colors">
+                    <span class="text-lg font-semibold text-gray-900">Filter</span>
+                    <svg class="w-5 h-5 transition-transform duration-300" id="filter-icon" stroke="currentColor"
+                        viewBox="0 0 24 24" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 9l6 6 6-6"></path>
+                    </svg>
+                </button>
+
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Left Sidebar Filter -->
+                    <div class="w-full md:w-72 flex-shrink-0">
+                        <!-- Filter Form -->
+                        <form method="GET" 
+                            class="filter-form bg-white rounded-xl shadow-sm border border-gray-100 p-4 
+                                   hidden md:block md:sticky md:top-4
+                                   transition-all duration-300 ease-in-out" 
+                            id="filter-form">
+
+                            <!-- Filter Title -->
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Filter</h3>
+                                <button type="button" id="reset-filter" 
+                                    class="text-sm text-blue-600 hover:text-blue-800 transition-colors cursor-pointer">Reset</button>
+                            </div>
+
+                            <!-- Kategori (Accordion) -->
+                            <div class="mb-6">
+                                <button type="button"
+                                    class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
+                                    <span>Kategori</span>
+                                    <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7">
+                                        </path>
+                                    </svg>
                                 </button>
-                            @endforeach
-                        </div>
-                        
-                        <!-- Category List -->
-                        <div class="space-y-2">
-                            @php
-                                $categories = [
-                                    'Kerajinan Kriya',
-                                    'Fashion & Aksesoris', 
-                                    'Pertanian & Perkebunan',
-                                    'Jasa',
-                                    'Seni & Musik',
-                                    'Komputer & Elektronik',
-                                    'Makanan & Minuman',
-                                    'Kesehatan & Kecantikan',
-                                    'Pertanian & Perkebunan',
-                                    'Handphone & Aksesoris'
-                                ];
-                            @endphp
-                            
-                            @foreach($categories as $category)
-                                <label class="flex items-center cursor-pointer hover:bg-gray-50 p-2 rounded">
-                                    <input type="checkbox" class="mr-3 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                                    <span class="text-sm text-gray-700">{{ $category }}</span>
-                                </label>
-                            @endforeach
-                        </div>
+                                <div class="accordion-content space-y-2">
+                                    <label class="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors">
+                                        <input type="radio" name="category" value=""
+                                            class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2"
+                                            {{ !request('category') ? 'checked' : '' }}>
+                                        <span class="text-sm">Semua Kategori</span>
+                                    </label>
+                                    @foreach ($categories as $category)
+                                        <label class="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded transition-colors">
+                                            <input type="radio" name="category" value="{{ $category->slug }}"
+                                                class="border-gray-300 text-blue-600 focus:ring-blue-500 mr-2"
+                                                {{ request('category') == $category->slug ? 'checked' : '' }}>
+                                            <span class="text-sm">{{ $category->name }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Apply Filter Button -->
+                            <div class="space-y-3">
+                                <button type="submit" 
+                                    class="w-full bg-[#113EA1] text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium cursor-pointer">
+                                    Terapkan Filter
+                                </button>
+                            </div>
+
+                            <!-- Hidden search input to preserve search when filtering -->
+                            @if(request('search'))
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                            @endif
+
+                            <!-- Hidden starts_with input to preserve filter when searching -->
+                            @if(request('starts_with'))
+                                <input type="hidden" name="starts_with" value="{{ request('starts_with') }}">
+                            @endif
+                        </form>
                     </div>
-                </div>
-            </div>
 
-            <!-- Main Content -->
-            <div class="lg:w-3/4">
-                <!-- Company Logos Grid -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 mb-12">
-                    @php
-                        $companies = [
-                            ['name' => 'Apple', 'logo' => 'https://logo.clearbit.com/apple.com', 'category' => 'teknologi'],
-                            ['name' => 'Nike', 'logo' => 'https://logo.clearbit.com/nike.com', 'category' => 'fashion'],
-                            ['name' => 'Puma', 'logo' => 'https://logo.clearbit.com/puma.com', 'category' => 'fashion'],
-                            ['name' => 'Hermes', 'logo' => 'https://logo.clearbit.com/hermes.com', 'category' => 'fashion'],
-                            ['name' => 'Wrangler', 'logo' => 'https://logo.clearbit.com/wrangler.com', 'category' => 'fashion'],
-                            ['name' => 'PSN Store', 'logo' => 'https://logo.clearbit.com/playstation.com', 'category' => 'teknologi'],
-                            ['name' => 'Adobe', 'logo' => 'https://logo.clearbit.com/adobe.com', 'category' => 'teknologi'],
-                            ['name' => 'Almadall', 'logo' => 'https://logo.clearbit.com/amazon.com', 'category' => 'teknologi'],
-                            ['name' => 'PSN Store', 'logo' => 'https://logo.clearbit.com/playstation.com', 'category' => 'teknologi'],
-                            ['name' => 'PSN Store', 'logo' => 'https://logo.clearbit.com/playstation.com', 'category' => 'teknologi'],
-                            ['name' => 'PSN Store', 'logo' => 'https://logo.clearbit.com/playstation.com', 'category' => 'teknologi'],
-                            ['name' => 'PSN Store', 'logo' => 'https://logo.clearbit.com/playstation.com', 'category' => 'teknologi'],
-                        ];
-                    @endphp
-
-                    @foreach($companies as $company)
-                        <div class="company-card bg-white rounded-xl border border-gray-200 p-4 hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group">
-                            <div class="aspect-square flex items-center justify-center mb-3">
-                                <img src="{{ $company['logo'] }}" 
-                                     alt="{{ $company['name'] }}" 
-                                     class="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
-                                     onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzMzNzNkYyIvPgo8dGV4dCB4PSIyNCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj57eyBzdWJzdHIoJGNvbXBhbnlbJ25hbWUnXSwgMCwgMSkgfX08L3RleHQ+Cjwvc3ZnPgo='">
+                    <!-- Right Content Area -->
+                    <div class="flex-1">
+                        <!-- Header with Search -->
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+                            <div>
+                                <p class="text-gray-600" id="results-count">
+                                    Perlihatkan {{ $umkms->count() }} dari {{ $umkms->total() }} toko
+                                </p>
                             </div>
-                            <div class="text-center">
-                                <h4 class="font-medium text-gray-900 text-sm">{{ $company['name'] }}</h4>
+
+                            <!-- Search Input -->
+                            <form id="search-form" class="relative w-full sm:w-auto sm:min-w-[300px]">
+                                <input type="text" id="search-input" name="search"
+                                    placeholder="Jelajahi UMKM di sini"
+                                    class="w-full border border-gray-300 rounded-full pl-4 pr-12 py-3 text-sm text-gray-900 placeholder-gray-400 bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                                    value="{{ request('search') }}" />
+
+                                <button type="submit" class="absolute right-3 top-2.5 p-1 hover:bg-gray-100 rounded-full transition-colors">
+                                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+
+                                @if(request('search'))
+                                    <button type="button" id="clear-search" 
+                                        class="absolute right-8 top-2.5 p-1 hover:bg-gray-100 rounded-full transition-colors">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                @endif
+
+                                <!-- Preserve filter parameters -->
+                                @foreach(request()->except(['search', 'page']) as $key => $value)
+                                    @if($value)
+                                        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                    @endif
+                                @endforeach
+                            </form>
+                        </div>
+
+                        <!-- Alphabet Filter -->
+                        <div class="mb-6">
+                            <div class="flex flex-wrap gap-1">
+                                @foreach(range('A', 'Z') as $letter)
+                                    <a href="{{ route('umkmbinaan', array_merge(request()->except(['page', 'starts_with']), request('starts_with') == $letter ? [] : ['starts_with' => $letter])) }}"
+                                       class="px-2 py-1 text-sm rounded-lgtransition-colors {{ request('starts_with') == $letter ? 'text-blue-800 underline' : 'bg-white text-gray-600 hover:bg-gray-50' }}">
+                                        {{ $letter }}
+                                    </a>
+                                @endforeach
+                                @if(request('starts_with'))
+                                    <a href="{{ route('umkmbinaan', request()->except(['page', 'starts_with'])) }}"
+                                       class="px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">
+                                        Reset
+                                    </a>
+                                @endif
                             </div>
                         </div>
-                    @endforeach
-                </div>
 
-                <!-- Pagination -->
-                <div class="flex justify-center items-center space-x-2 mb-12">
-                    <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </button>
-                    
-                    @for($i = 1; $i <= 5; $i++)
-                        <button class="w-8 h-8 rounded-full {{ $i === 2 ? 'bg-blue-600 text-white' : 'border border-gray-300 hover:bg-gray-50' }} flex items-center justify-center text-sm">
-                            {{ $i }}
-                        </button>
-                    @endfor
-                    
-                    <span class="text-gray-400">...</span>
-                    <button class="w-8 h-8 rounded-full border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-sm">21</button>
-                    
-                    <button class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
+                        <!-- UMKM Grid -->
+                        @if($umkms->count() > 0)
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8" id="umkm-grid">
+                                @foreach ($umkms as $umkm)
+                                    <!-- UMKM Card -->
+                                    <a href="{{ route('umkm-binaan', $umkm->slug) }}"
+                                        class="umkm-card bg-white rounded-2xl border border-gray-300 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 p-3 text-center cursor-pointer hover:-translate-y-0.5">
+                                        <div class="h-full flex flex-col">
+                                            <div class="mb-3 flex justify-center">
+                                                <div class="size-16 bg-gray-50 rounded-lg overflow-hidden">
+                                                    <img src="{{ $umkm->logo ? asset('storage/' . $umkm->logo) : asset('images/default-image.png') }}"
+                                                        alt="{{ $umkm->name }}" 
+                                                        class="w-full h-full object-cover" 
+                                                        loading="lazy" />
+                                                </div>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900 line-clamp-2">
+                                                {{ $umkm->name }}
+                                            </h3>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="mt-8">
+                                {{ $umkms->links('pagination::tailwind') }}
+                            </div>
+                        @else
+                            <!-- Empty State -->
+                            <div class="text-center py-16">
+                                <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">UMKM tidak ditemukan</h3>
+                                <p class="text-gray-600 mb-4">Coba ubah kata kunci pencarian atau filter yang digunakan</p>
+                                <button type="button" onclick="window.location.href='{{ route('umkmbinaan') }}'" 
+                                    class="cursor-pointer bg-[#113EA1] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                                    Reset Pencarian
+                                </button>
+                            </div>
+                        @endif
+                    </div>
                 </div>
 
                 <!-- Achievements Section -->
-                <div class="mb-12">
+                <div class="mt-16 mb-12">
                     <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">
-                        Prestasi membanggakan
+                        Prestasi Membanggakan
                         <div class="w-24 h-1 bg-blue-600 mx-auto mt-2 rounded-full"></div>
                     </h2>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Achievement 1 -->
                         <div class="relative rounded-xl overflow-hidden group cursor-pointer">
                             <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop" 
-                                 alt="Achievement 1" 
-                                 class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                                alt="Achievement 1" 
+                                class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 text-white">
                                 <div class="bg-blue-600 text-xs px-2 py-1 rounded mb-2">UMKM</div>
@@ -159,8 +235,8 @@
                         <!-- Achievement 2 -->
                         <div class="relative rounded-xl overflow-hidden group cursor-pointer">
                             <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop" 
-                                 alt="Achievement 2" 
-                                 class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                                alt="Achievement 2" 
+                                class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 text-white">
                                 <div class="bg-green-600 text-xs px-2 py-1 rounded mb-2">SUCCESS</div>
@@ -172,8 +248,8 @@
                         <!-- Achievement 3 -->
                         <div class="relative rounded-xl overflow-hidden group cursor-pointer">
                             <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=400&h=300&fit=crop" 
-                                 alt="Achievement 3" 
-                                 class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                                alt="Achievement 3" 
+                                class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 text-white">
                                 <div class="bg-purple-600 text-xs px-2 py-1 rounded mb-2">INNOVATION</div>
@@ -190,92 +266,180 @@
                     <p class="text-lg mb-6 opacity-90">
                         Dapatkan pendampingan dan dukungan untuk mengembangkan usaha Anda
                     </p>
-                    <a
-                       class="inline-flex items-center px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <a href="#" class="inline-flex items-center px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
                         Daftar Sekarang
                     </a>
                 </div>
+
             </div>
         </div>
-    </div>
-</section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Alphabet filter functionality
-    const alphabetButtons = document.querySelectorAll('button[class*="w-8 h-8"]');
-    const companyCards = document.querySelectorAll('.company-card');
-    
-    alphabetButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const letter = this.textContent.trim();
-            
-            // Update active state
-            alphabetButtons.forEach(btn => {
-                btn.classList.remove('bg-blue-50', 'border-blue-300', 'text-blue-600');
-                btn.classList.add('text-gray-600');
-            });
-            
-            this.classList.add('bg-blue-50', 'border-blue-300', 'text-blue-600');
-            this.classList.remove('text-gray-600');
-            
-            // Filter companies (for demo purposes, we'll just show/hide randomly)
-            companyCards.forEach((card, index) => {
-                if (letter === 'A' || Math.random() > 0.5) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.3s ease-in-out';
-                } else {
-                    card.style.display = 'none';
+        <style>
+            .accordion-content {
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.3s ease-out;
+                padding: 0 4px;
+            }
+
+            .accordion-content.open {
+                max-height: 500px;
+            }
+
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Mobile filter toggle functionality
+                const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+                const filterForm = document.getElementById('filter-form');
+                const filterIcon = document.getElementById('filter-icon');
+
+                function showMobileFilter() {
+                    filterForm.classList.remove('hidden');
+                    filterIcon.style.transform = 'rotate(180deg)';
+                }
+
+                function hideMobileFilter() {
+                    filterForm.classList.add('hidden');
+                    filterIcon.style.transform = 'rotate(0deg)';
+                }
+
+                if (mobileFilterToggle) {
+                    mobileFilterToggle.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        if (filterForm.classList.contains('hidden')) {
+                            showMobileFilter();
+                        } else {
+                            hideMobileFilter();
+                        }
+                    });
+                }
+
+                // Close mobile filter when window is resized to desktop
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth >= 768) {
+                        filterForm.classList.remove('hidden');
+                        filterForm.classList.add('md:block');
+                        filterIcon.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Initialize accordion functionality
+                const accordionButtons = document.querySelectorAll('.accordion-button');
+
+                accordionButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        const content = this.nextElementSibling;
+                        const icon = this.querySelector('.accordion-icon');
+                        const isOpen = content.classList.contains('open');
+
+                        if (isOpen) {
+                            content.classList.remove('open');
+                            content.style.maxHeight = '0px';
+                            icon.style.transform = 'rotate(0deg)';
+                        } else {
+                            content.classList.add('open');
+                            content.style.maxHeight = content.scrollHeight + 'px';
+                            icon.style.transform = 'rotate(180deg)';
+                        }
+                    });
+
+                    // Open accordions by default
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    content.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                });
+
+                // Reset filter functionality
+                function resetFilters() {
+                    const currentParams = new URLSearchParams(window.location.search);
+                    const search = currentParams.get('search');
+                    const url = new URL("{{ route('umkmbinaan') }}", window.location.origin);
+
+                    if (search) {
+                        url.searchParams.set('search', search);
+                    }
+
+                    window.location.href = url.href;
+                }
+
+                const resetFilterBtn = document.getElementById('reset-filter');
+
+                if (resetFilterBtn) {
+                    resetFilterBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        resetFilters();
+                    });
+                }
+
+                // Filter form submission
+                const filterFormElement = document.getElementById('filter-form');
+                if (filterFormElement) {
+                    filterFormElement.addEventListener('submit', function(e) {
+                        // Close mobile filter after submission
+                        if (window.innerWidth < 768) {
+                            hideMobileFilter();
+                        }
+                    });
+                }
+
+                // Search functionality
+                const searchForm = document.getElementById('search-form');
+                const searchInput = document.getElementById('search-input');
+                const clearSearchBtn = document.getElementById('clear-search');
+
+                if (searchForm && searchInput) {
+                    searchForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+
+                        const currentParams = new URLSearchParams(window.location.search);
+                        const searchTerm = searchInput.value.trim();
+
+                        if (searchTerm) {
+                            currentParams.set('search', searchTerm);
+                        } else {
+                            currentParams.delete('search');
+                        }
+
+                        // Remove page parameter when searching
+                        currentParams.delete('page');
+
+                        const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
+                        window.location.href = newUrl;
+                    });
+
+                    if (clearSearchBtn) {
+                        clearSearchBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            const currentParams = new URLSearchParams(window.location.search);
+                            currentParams.delete('search');
+                            currentParams.delete('page');
+
+                            const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
+                            window.location.href = newUrl;
+                        });
+                    }
                 }
             });
-        });
-    });
-    
-    // Category filter functionality
-    const categoryCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-    
-    categoryCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            // Filter logic would go here
-            console.log('Category filter changed:', this.nextElementSibling.textContent);
-        });
-    });
-    
-    // Company card click functionality
-    companyCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const companyName = this.querySelector('h4').textContent;
-            // You could redirect to a company detail page or show a modal
-            console.log('Clicked on company:', companyName);
-        });
-    });
-    
-    // Achievement cards hover effect
-    const achievementCards = document.querySelectorAll('.relative.rounded-xl');
-    
-    achievementCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-4px)';
-            this.style.transition = 'transform 0.3s ease';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
-
-// Add CSS animation for fade in effect
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-`;
-document.head.appendChild(style);
-</script>
+        </script>
 @endsection

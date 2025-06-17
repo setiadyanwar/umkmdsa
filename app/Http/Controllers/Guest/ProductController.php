@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\Umkm;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,8 +20,11 @@ class ProductController extends Controller
         }
 
         // Filter by category
-        if ($categoryId = $request->input('category')) {
-            $query->where('category_id', $categoryId);
+        if ($categorySlug = $request->input('category')) {
+            $category = ProductCategory::where('slug', $categorySlug)->first();
+            if ($category) {
+                $query->where('category_id', $category->id);
+            }
         }
 
         // Filter by UMKM
@@ -28,11 +33,18 @@ class ProductController extends Controller
         }
 
         // Filter by price
-        if ($request->filled('price_min')) {
-            $query->where('price_final', '>=', $request->input('price_min'));
+        $priceMin = $request->input('price_min');
+        $priceMax = $request->input('price_max');
+
+        if ($priceMin && $priceMax && $priceMin > $priceMax) {
+            // Swap nilainya
+            [$priceMin, $priceMax] = [$priceMax, $priceMin];
         }
-        if ($request->filled('price_max')) {
-            $query->where('price_final', '<=', $request->input('price_max'));
+        if ($priceMin) {
+            $query->where('price_final', '>=', $priceMin);
+        }
+        if ($priceMax) {
+            $query->where('price_final', '<=', $priceMax);
         }
 
         // Sort
@@ -56,14 +68,15 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
         }
 
-        $products = $query->paginate(10)->withQueryString();
+        $products = $query->paginate(12)->withQueryString();
+        $categories = ProductCategory::all();
 
-        return view('guest.products.index', compact('products')); // TODO: Sesuaikan path view
+        return view('etalase', compact('products', 'categories'));
     }
 
     public function show(Product $product)
     {
         $product->increment('views'); // Increment views untuk terpopuler atau paling banyak dicari
-        return view('guest.products.show', compact('product')); // TODO: Sesuaikan path view
+        return view('single-product', compact('product'));
     }
 }

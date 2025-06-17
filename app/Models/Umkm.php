@@ -28,9 +28,15 @@ class Umkm extends Model
         'registered_at',
         'open_hour',
         'close_hour',
-        'total_products',
         'map_embed_url'
     ];
+
+    protected $casts = [
+        'registered_at' => 'datetime',
+        'open_hour' => 'datetime:H:i',
+        'close_hour' => 'datetime:H:i',
+    ];
+
 
     protected $with = [
         'category'
@@ -44,6 +50,11 @@ class Umkm extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function getTotalProductsAttribute()
+    {
+        return $this->products()->count();
     }
 
     protected static function booted()

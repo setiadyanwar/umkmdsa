@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->time('open_hour')->nullable();
             $table->time('close_hour')->nullable();
             $table->integer('total_products')->default(0);
-            $table->string('map_embed_url')->nullable();
+            $table->text('map_embed_url')->nullable();
             $table->timestamps();
         });
     }

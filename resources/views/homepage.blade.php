@@ -242,7 +242,7 @@
 
                     <!-- CTA Button -->
                     <button
-                        class="w-full bg-[#113EA1] hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-3xl transition-colors duration-200">
+                        class="cursor-pointer w-full bg-[#113EA1] hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-3xl transition-colors duration-200">
                         Selengkapnya
                     </button>
                 </div>
@@ -294,9 +294,10 @@
                     <p class="text-gray-600 text-lg">Jelajahi berbagai produk UMKM terdaftar</p>
                     <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-[#113EA1] mt-3 rounded-full"></div>
                 </div>
-                <button class="border-2 border-[#113EA1] text-[#113EA1] px-6 py-3 rounded-3xl hover:bg-[#113EA1] hover:text-white transition-all duration-300 font-semibold">
+                <a href="{{ route('etalase') }}"
+                    class="border-2 border-[#113EA1] text-[#113EA1] px-6 py-3 rounded-3xl hover:bg-[#113EA1] hover:text-white transition-all duration-300 font-semibold">
                     Lihat Semua
-                </button>
+                </a>
             </div>
 
             <!-- Main Content Container -->
@@ -315,7 +316,8 @@
                                     500+ Produk Terdaftar
                                 </h2>
                                 <p class="text-white text-lg mb-6">Daftarkan usahamu sekarang juga!</p>
-                                <button class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold cursor-pointer">
+                                <button
+                                    class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold cursor-pointer">
                                     Daftar Disini
                                 </button>
                             </div>
@@ -323,61 +325,44 @@
                     </div>
 
                     <!-- Right Panel - Products Scroll -->
-                    <div class="h-auto lg:h-full overflow-hidden">
-                        <!-- Mobile: Horizontal Scroll -->
-                        <div class="lg:hidden h-full p-4">
-                            <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" style="scroll-snap-type: x mandatory;">
-                                @for($i = 0; $i < 5; $i++)
-                                <div class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-72 hover:-translate-y-1 cursor-pointer" style="scroll-snap-align: start;">
-                                    <div class="p-5 h-full flex flex-col">
-                                        <div class="mb-4 flex justify-center">
-                                            <div class="w-full h-48 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag" class="w-full h-full object-cover" />
+                    <div class="h-full overflow-x-auto m-4 scrollbar-hide" style="scroll-snap-type: x mandatory;">
+                        @if($featuredProducts->isNotEmpty())
+                            <div class="h-full flex items-stretch gap-4 lg:gap-6 p-2">
+                                @foreach($featuredProducts as $product)
+                                    <a href="{{ route('singleview', $product->slug) }}"
+                                        class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col"
+                                        style="scroll-snap-align: start;">
+                                        <div class="h-full flex flex-col w-60 lg:w-72 min-h-[360px]">
+                                            <div class="mb-2 flex justify-center">
+                                                <div class="aspect-square w-full bg-gray-50 rounded-t-2xl overflow-hidden">
+                                                    <img src="{{ $product->primaryImage ? asset('storage/' . $product->primaryImage->image_url) : asset('images/default-image.png') }}"
+                                                        alt="{{ $product->name }}" class="w-full h-full object-cover"
+                                                        loading="lazy" />
+                                                </div>
+                                            </div>
+                                            <div class="mx-2 mb-2 flex-1 flex flex-col justify-between gap-2">
+                                                <div>
+                                                    <h3 class="font-semibold text-gray-900 line-clamp-2">
+                                                        {{ $product->name }}
+                                                    </h3>
+                                                    <p class="text-[#113EA1] font-bold text-lg truncate">
+                                                        Rp.{{ number_format($product->price_final, 0, ',', '.') }}
+                                                    </p>
+                                                    <div class="flex items-center text-gray-400 text-sm truncate gap-2">
+                                                        <i class="fa-solid fa-location-dot"></i>
+                                                        <span>{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-base leading-tight">Celyne Rattan Bag</h3>
-                                            <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                            <div class="flex items-center text-gray-400 text-sm">
-                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span>Kabupaten Gowa</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endfor
+                                    </a>
+                                @endforeach
                             </div>
-                        </div>
-
-                        <!-- Desktop: Vertical Scroll -->
-                        <div class="hidden lg:block w-full h-full overflow-y-auto p-4">
-                            <div class="flex gap-6 h-full items-center scrollbar-hide"  style="scroll-snap-type: x mandatory;">
-                                @for($i = 0; $i < 5; $i++)
-                                <div class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-80 h-[420px] hover:-translate-y-1 cursor-pointer">
-                                    <div class="p-5 h-full flex flex-col">
-                                        <div class="mb-6 flex justify-center">
-                                            <div class="w-full h-60 bg-gray-50 rounded-xl overflow-hidden">
-                                                <img src="{{ asset('images/bag.png') }}" alt="Celyne Rattan Bag" class="w-full h-full object-cover" />
-                                            </div>
-                                        </div>
-                                        <div class="mt-auto">
-                                            <h3 class="font-semibold text-gray-900 mb-2 text-sm leading-tight">Celyne Rattan Bag</h3>
-                                            <p class="text-[#113EA1] font-bold text-lg mb-3">Rp.180.000</p>
-                                            <div class="flex items-center text-gray-400 text-xs">
-                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                <span>Kabupaten Gowa</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endfor
-                            </div>
-                        </div>
+                        @else
+                            <div class="text-center text-gray-400 italic">Tidak ada produk unggulan saat ini.</div>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
@@ -411,9 +396,9 @@
                         <img id="fadeImage" src="{{ asset('images/benefit.png') }}" alt="Benefit illustration"
                             class="max-w-full max-h-full object-contain transition-all duration-1000 ease-out opacity-0 transform scale-95"
                             onload="setTimeout(() => {
-                             this.classList.remove('opacity-0', 'scale-95');
-                             this.classList.add('opacity-100', 'scale-100');
-                         }, 100)" />
+                                                        this.classList.remove('opacity-0', 'scale-95');
+                                                        this.classList.add('opacity-100', 'scale-100');
+                                                    }, 100)" />
                     </div>
                 </div>
             </div>
@@ -435,452 +420,114 @@
 
             <!-- Scrolling Container -->
             <div class="relative overflow-hidden">
-                <div id="scrolling-track" class="flex whitespace-nowrap py-4">
-                    <div class="inline-flex animate-scroll">
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
+                @if ($testimonials->isNotEmpty())
+                    <div id="scrolling-track" class="flex whitespace-nowrap py-4">
+                        <!-- Loop pertama -->
+                        <div class="inline-flex animate-scroll">
+                            @foreach($testimonials as $testimonial)
+                                <div
+                                    class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
+                                    <div class="absolute -top-4 left-3">
+                                        <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
+                                            <i class="fa-solid fa-quote-left text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-0.5 mb-2">
+                                        @for($i = 0; $i < $testimonial->rating; $i++)
+                                            <i class="fa-solid fa-star text-yellow-500"></i>
+                                        @endfor
+                                    </div>
+                                    <p class="text-gray-700 mb-3 leading-snug text-sm">
+                                        {{ $testimonial->message }}
+                                    </p>
+                                    <div class="flex items-center border-t pt-3 mt-2">
+                                        <img class="w-7 h-7 rounded-full mr-3"
+                                            src="{{ $testimonial->image_url ? asset('storage/' . $testimonial->image_url) : asset('images/default-avatar.png') }}"
+                                            alt="{{ $testimonial->name }}">
+                                        <div>
+                                            <p class="font-medium text-gray-900 text-sm">{{ $testimonial->name }}</p>
+                                            <p class="text-xs text-gray-500">{{ $testimonial->role }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
 
-
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
+                        <!-- Loop duplikat, untuk infinite scroll -->
+                        <div class="inline-flex animate-scroll" aria-hidden="true">
+                            @foreach($testimonials as $testimonial)
+                                <div
+                                    class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
+                                    <div class="absolute -top-4 left-3">
+                                        <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
+                                            <i class="fa-solid fa-quote-left text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-0.5 mb-2">
+                                        @for($i = 0; $i < $testimonial->rating; $i++)
+                                            <i class="fa-solid fa-star text-yellow-500"></i>
+                                        @endfor
+                                    </div>
+                                    <p class="text-gray-700 mb-3 line-clamp-4">
+                                        {{ $testimonial->message }}
+                                    </p>
+                                    <div class="flex items-center border-t pt-3 mt-2">
+                                        <img class="w-7 h-7 rounded-full mr-3"
+                                            src="{{ $testimonial->image_url ? asset('storage/' . $testimonial->image_url) : asset('images/default-avatar.png') }}"
+                                            alt="{{ $testimonial->name }}">
+                                        <div>
+                                            <p class="font-medium text-gray-900 text-sm">{{ $testimonial->name }}</p>
+                                            <p class="text-xs text-gray-500">{{ $testimonial->role }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
-
-                    <!-- Duplicated  looping -->
-                    <div class="inline-flex animate-scroll" aria-hidden="true">
-
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-                            <!-- Testimonial Text -->
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-                            <!-- User Info -->
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            class="relative bg-white rounded-lg shadow-md p-4 pt-8 mx-2 w-64 inline-block whitespace-normal">
-
-                            <div class="absolute -top-4 left-3">
-                                <div class="w-7 h-7 bg-[#113EA1] rounded-full flex items-center justify-center shadow">
-                                    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="flex space-x-0.5 mb-2">
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                                <svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.184 3.64a1 1 0 00.95.69h3.826c.969 0 1.371 1.24.588 1.81l-3.096 2.25a1 1 0 00-.364 1.118l1.184 3.64c.3.921-.755 1.688-1.54 1.118l-3.096-2.25a1 1 0 00-1.176 0l-3.096 2.25c-.785.57-1.84-.197-1.54-1.118l1.184-3.64a1 1 0 00-.364-1.118L2.431 9.067c-.783-.57-.38-1.81.588-1.81h3.826a1 1 0 00.95-.69l1.184-3.64z" />
-                                </svg>
-                            </div>
-
-                            <p class="text-gray-700 mb-3 leading-snug text-sm">
-                                Setelah mendapatkan pendampingan, kini saya bisa menggunakan tanda tangan digital
-                                untuk
-                                transaksi dan menjalankan bisnis dengan lebih efisien!
-                            </p>
-
-                            <div class="flex items-center border-t pt-3 mt-2">
-                                <img class="w-7 h-7 rounded-full mr-3" src="https://i.pravatar.cc/100?img=3"
-                                    alt="Justus Menke">
-                                <div>
-                                    <p class="font-medium text-gray-900 text-sm">Justus Menke</p>
-                                    <p class="text-xs text-gray-500">Pemilik Toko Craft</p>
-                                </div>
-                            </div>
-                        </div>
+                @else
+                    <div class="text-center text-gray-400 italic py-8">
+                        Tidak ada testimoni saat ini.
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
 
 
     {{-- FAQ section --}}
-    <section
-        class="py-12 md:py-20 antialiased bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 mb-16">
+    <section class="py-12 md:py-20 antialiased bg-gradient-to-br from-blue-50 to-purple-50">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
 
 
             <div class="text-center mb-8">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Seringkali ditanyakan</h2>
+                <h2 class="text-3xl font-bold text-gray-900">Seringkali ditanyakan</h2>
                 <div class="w-24 h-1 bg-[#113EA1] mx-auto mt-2 rounded-2xl"></div>
             </div>
 
             <div x-data="{ selected: 1 }" class="space-y-3 max-w-2xl mx-auto">
                 <!-- FAQ Item 1 (Expanded by default) -->
-                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200"
-                    :class="selected === 1 ?
-                        'border-2 border-[#113EA1] bg-white dark:bg-gray-800' :
-                        'border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'">
+                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" :class="selected === 1 ?
+                                                                                    'border-2 border-[#113EA1] bg-white' :
+                                                                                    'border border-gray-200 bg-white'">
                     <button @click="selected === 1 ? selected = null : selected = 1"
-                        class="flex items-center justify-between w-full px-5 py-4 text-left focus:outline-none hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                        <span class="text-gray-800 dark:text-gray-200 font-medium text-sm flex-1">Apa itu UMKM
+                        class="flex items-center justify-between w-full px-5 py-4 text-left cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors">
+                        <span class="text-gray-800 font-medium text-sm flex-1">Apa itu UMKM
                             DSA?</span>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-3 border-2"
                             :class="{
-                                'bg-[#113EA1] border-[#113EA1]': selected === 1,
-                                'bg-white shadow-xl': selected !== 1
-                            }">
-                            <svg class="w-4 h-4 transition-transform duration-200"
-                                :class="{
-                                    'rotate-0 text-white': selected === 1,
-                                    '-rotate-90 text-[#113EA1]': selected !== 1
-                                }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
+                                                                                            'bg-[#113EA1] border-[#113EA1]': selected === 1,
+                                                                                            'bg-white shadow-xl': selected !== 1
+                                                                                        }">
+                            <svg class="w-4 h-4 transition-transform duration-200" :class="{
+                                                                                                'rotate-0 text-white': selected === 1,
+                                                                                                '-rotate-90 text-[#113EA1]': selected !== 1
+                                                                                            }" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
                     </button>
-                    <div x-show="selected === 1" x-collapse
-                        class="px-5 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    <div x-show="selected === 1" x-collapse class="px-5 pb-4 text-gray-600 text-sm leading-relaxed">
                         <p>UMKM DSA adalah program pendampingan dan pemberdayaan UMKM berbasis teknologi digital
                             yang
                             dikembangkan oleh IPB. Program ini membantu usaha kecil menengah dalam menerapkan tanda
@@ -890,33 +537,29 @@
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200"
-                    :class="selected === 2 ?
-                        'border-2 border-[#113EA1] bg-white dark:bg-gray-800' :
-                        'border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'">
+                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" :class="selected === 2 ?
+                                                                                    'border-2 border-[#113EA1] bg-white' :
+                                                                                    'border border-gray-200 bg-white'">
                     <button @click="selected === 2 ? selected = null : selected = 2"
-                        class="flex items-center justify-between w-full px-5 py-4 text-left focus:outline-none hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                        <span class="text-gray-800 dark:text-gray-200 font-medium text-sm flex-1">Bagaimana cara
+                        class="flex items-center justify-between w-full px-5 py-4 text-left cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors">
+                        <span class="text-gray-800 font-medium text-sm flex-1">Bagaimana cara
                             mendaftar
                             UMKM DSA?</span>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-3 border-2"
                             :class="{
-                                'bg-[#113EA1] border-[#113EA1]': selected === 2,
-                                'bg-white shadow-xl': selected !== 2
-                            }">
-                            <svg class="w-4 h-4 transition-transform duration-200"
-                                :class="{
-                                    'rotate-0 text-white': selected === 2,
-                                    '-rotate-90 text-[#113EA1]': selected !== 2
-                                }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
+                                                                                            'bg-[#113EA1] border-[#113EA1]': selected === 2,
+                                                                                            'bg-white shadow-xl': selected !== 2
+                                                                                        }">
+                            <svg class="w-4 h-4 transition-transform duration-200" :class="{
+                                                                                                'rotate-0 text-white': selected === 2,
+                                                                                                '-rotate-90 text-[#113EA1]': selected !== 2
+                                                                                            }" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
                     </button>
-                    <div x-show="selected === 2" x-collapse
-                        class="px-5 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    <div x-show="selected === 2" x-collapse class="px-5 pb-4 text-gray-600 text-sm leading-relaxed">
                         <p>Untuk mendaftar UMKM DSA, Anda dapat mengunjungi situs web resmi kami dan mengisi formulir
                             pendaftaran. Setelah itu, tim kami akan menghubungi Anda untuk proses selanjutnya.</p>
                     </div>
@@ -924,33 +567,29 @@
 
 
                 <!-- FAQ Item 3 -->
-                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200"
-                    :class="selected === 3 ?
-                        'border-2 border-[#113EA1] bg-white dark:bg-gray-800' :
-                        'border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800'">
+                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" :class="selected === 3 ?
+                                                                                    'border-2 border-[#113EA1] bg-white' :
+                                                                                    'border border-gray-200 bg-white'">
                     <button @click="selected === 3 ? selected = null : selected = 3"
-                        class="flex items-center justify-between w-full px-5 py-4 text-left focus:outline-none hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                        <span class="text-gray-800 dark:text-gray-200 font-medium text-sm flex-1">Apa manfaat
+                        class="flex items-center justify-between w-full px-5 py-4 text-left cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors">
+                        <span class="text-gray-800 font-medium text-sm flex-1">Apa manfaat
                             menggunakan
                             tanda tangan digital?</span>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-3 border-2"
                             :class="{
-                                'bg-[#113EA1] border-[#113EA1]': selected === 3,
-                                'bg-white shadow-xl': selected !== 3
-                            }">
-                            <svg class="w-4 h-4 transition-transform duration-200"
-                                :class="{
-                                    'rotate-0 text-white': selected === 3,
-                                    '-rotate-90 text-[#113EA1]': selected !== 3
-                                }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
+                                                                                            'bg-[#113EA1] border-[#113EA1]': selected === 3,
+                                                                                            'bg-white shadow-xl': selected !== 3
+                                                                                        }">
+                            <svg class="w-4 h-4 transition-transform duration-200" :class="{
+                                                                                                'rotate-0 text-white': selected === 3,
+                                                                                                '-rotate-90 text-[#113EA1]': selected !== 3
+                                                                                            }" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
                     </button>
-                    <div x-show="selected === 3" x-collapse
-                        class="px-5 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    <div x-show="selected === 3" x-collapse class="px-5 pb-4 text-gray-600 text-sm leading-relaxed">
                         <p>Tanda tangan digital memberikan keamanan dan keaslian pada dokumen elektronik, mengurangi
                             risiko penipuan, serta mempercepat proses bisnis dengan menghilangkan kebutuhan untuk
                             mencetak dan menandatangani dokumen secara fisik.</p>
@@ -972,7 +611,7 @@
                 <h2 class="text-2xl font-semibold text-gray-800 text-left">Mari Bergabung<br>Bersama Kami</h2>
                 <p class="text-sm text-gray-600 mt-2 text-left">Berkembang bersama raih impian.</p>
                 <button
-                    class="mt-4 bg-[#113EA1] text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-700 transition">
+                    class="mt-4 bg-[#113EA1] text-white cursor-pointer font-semibold px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-800 transition">
                     Live Chat
                     <img src="{{ asset('images/chat.png') }}" class="w-6 h-6" alt="chat">
                 </button>
