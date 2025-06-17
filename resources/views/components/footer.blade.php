@@ -12,7 +12,7 @@
                     <ul class="space-y-1 text-sm">
                         <li><a href="{{ route('homepage') }}" class="hover:underline">Beranda</a></li>
                         <li><a href="{{ route('etalase') }}" class="hover:underline">Etalase</a></li>
-                        <li><a href="{{ route('umkmbinaan') }}" class="hover:underline">Umkm Binaan</a></li>
+                        <li><a href="{{ route('umkm-binaan') }}" class="hover:underline">Umkm Binaan</a></li>
                     </ul>
                 </div>
 

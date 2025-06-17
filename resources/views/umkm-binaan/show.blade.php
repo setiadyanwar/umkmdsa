@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $currentRoute = 'umkmbinaan';
+    $currentRoute = 'umkm-binaan';
 @endphp
 
 @section('content')
@@ -13,7 +13,7 @@
                     Beranda
                 </a>
                 <span class="text-gray-400 mx-2">/</span>
-                <a href="{{ route('umkmbinaan') }}" class="hover:text-[#113EA1] transition-colors duration-200 font-medium whitespace-nowrap">
+                <a href="{{ route('umkm-binaan') }}" class="hover:text-[#113EA1] transition-colors duration-200 font-medium whitespace-nowrap">
                     UMKM Binaan
                 </a>
                 <span class="text-gray-400 mx-2">/</span>
@@ -177,7 +177,7 @@
                         @if($featuredProducts->isNotEmpty())
                             <div class="h-full flex items-stretch gap-4 lg:gap-6 p-2">
                                 @foreach($featuredProducts as $product)
-                                    <a href="{{ route('singleview', $product->slug) }}"
+                                    <a href="{{ route('etalase.show', $product->slug) }}"
                                         class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col"
                                         style="scroll-snap-align: start;">
                                         <div class="h-full flex flex-col w-60 lg:w-72 min-h-[360px]">
@@ -401,7 +401,7 @@
                                         <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8" id="products-grid">
                                             @foreach ($products as $product)
                                                 <!-- Product Card -->
-                                                <a href="{{ route('singleview', $product->slug) }}"
+                                                <a href="{{ route('etalase.show', $product->slug) }}"
                                                     class="product-card bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-full hover:-translate-y-0.5 cursor-pointer">
                                                     <div class="h-full flex flex-col">
                                                         <div class="mb-2 flex justify-center">
@@ -445,7 +445,7 @@
                                             </div>
                                             <h3 class="text-lg font-semibold text-gray-900 mb-2">Produk tidak ditemukan</h3>
                                             <p class="text-gray-600 mb-4">Coba ubah kata kunci pencarian atau filter yang digunakan</p>
-                                            <button type="button" onclick="window.location.href='{{ route('umkm-binaan', $umkm->slug) }}'" 
+                                            <button type="button" onclick="window.location.href='{{ route('umkm-binaan.show', $umkm->slug) }}'" 
                                                 class="bg-[#113EA1] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
                                                 Reset Pencarian
                                             </button>

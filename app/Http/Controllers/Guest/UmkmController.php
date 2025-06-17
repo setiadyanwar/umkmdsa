@@ -36,7 +36,7 @@ class UmkmController extends Controller
         $umkms = $query->orderBy('name')->paginate(12)->withQueryString();
         $categories = UmkmCategory::all();
 
-        return view('umkmbinaan', compact('umkms', 'categories'));
+        return view('umkm-binaan.index', compact('umkms', 'categories'));
     }
 
     public function show(Request $request, Umkm $umkm)
@@ -105,7 +105,7 @@ class UmkmController extends Controller
         // Semua kategori produk
         $categories = ProductCategory::all();
 
-        return view('profile-store.main-profile', compact(
+        return view('umkm-binaan.show', compact(
             'umkm',
             'featuredProducts',
             'categories',

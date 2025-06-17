@@ -13,18 +13,13 @@ Route::get('/', function () {
     return view('homepage', compact('featuredProducts', 'testimonials'));
 })->name('homepage');
 
-// Route::get('/etalase', function () {
-//     return view('etalase');
-// })->name('etalase');
-
 Route::get('/etalase', [ProductController::class, 'index'])->name('etalase');
 
+Route::get('/etalase/{product:slug}', [ProductController::class, 'show'])->name('etalase.show');
 
-// Route::get('/umkm-binaan', function () {
-//     return view('umkmbinaan');
-// })->name('umkmbinaan');
+Route::get('/umkm-binaan', [UmkmController::class, 'index'])->name('umkm-binaan');
 
-Route::get('/umkm-binaan', [UmkmController::class, 'index'])->name('umkmbinaan');
+Route::get('/umkm-binaan/{umkm:slug}', [UmkmController::class, 'show'])->name('umkm-binaan.show');
 
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
@@ -38,12 +33,8 @@ Route::get('/daftar-usaha', function () {
 
 // Route::get('/product', function () {
 //     return view('single-product');
-// })->name('singleview');
+// })->name('etalase.show');
 
-Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('singleview');
-
-// Route::get('/umkm-binaan/{umkm:slug}', function () {
+// Route::get('/umkm-binaan.show/{umkm:slug}', function () {
 //     return view('profile-store.main-profile');
-// })->name('umkm-binaan');
-
-Route::get('/umkm-binaan/{umkm:slug}', [UmkmController::class, 'show'])->name('umkm-binaan');
+// })->name('umkm-binaan.show');

@@ -187,7 +187,7 @@
                                 </div>
                             </div>
                             <div class="flex-shrink-0">
-                                <a href="{{ route('umkm-binaan', $product->umkm->slug) }}"
+                                <a href="{{ route('umkm-binaan.show', $product->umkm->slug) }}"
                                     class="bg-[#E7ECF6] text-[#113EA1] px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-medium border-2 border-[#113EA1] hover:bg-[#113EA1] hover:text-white transition-colors">
                                     <i class="fa-solid fa-store mr-1"></i>
                                     <span class="hidden sm:inline">Lihat Toko</span>
@@ -231,7 +231,7 @@
                                 </div>
 
                                 <!-- View All Button -->
-                                <a href="{{ route('umkm-binaan', $product->umkm->slug) }}"
+                                <a href="{{ route('umkm-binaan.show', $product->umkm->slug) }}"
                                     class="inline-block w-full text-center text-[#113EA1] underline font-medium py-2 md:py-3 px-4 md:px-6 hover:text-blue-700 transition-colors rounded-lg">
                                     Lihat Semua
                                 </a>
@@ -241,7 +241,7 @@
                             <div class="h-full overflow-x-auto scrollbar-hide" style="scroll-snap-type: x mandatory;">
                                 <div class="h-full flex items-stretch gap-4 lg:gap-6 p-2">
                                     @foreach($product->umkm->products->where('id', '!=', $product->id)->take(8) as $relatedProduct)
-                                        <a href="{{ route('singleview', $relatedProduct->slug) }}"
+                                        <a href="{{ route('etalase.show', $relatedProduct->slug) }}"
                                             class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col"
                                             style="scroll-snap-align: start;">
                                             <div class="h-full flex flex-col w-60 lg:w-72 min-h-[360px]">

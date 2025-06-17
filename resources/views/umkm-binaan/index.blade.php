@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $currentRoute = 'umkmbinaan';
+    $currentRoute = 'umkm-binaan';
 @endphp
 
 @section('content')
@@ -150,13 +150,13 @@
                         <div class="mb-6">
                             <div class="flex flex-wrap gap-1">
                                 @foreach(range('A', 'Z') as $letter)
-                                    <a href="{{ route('umkmbinaan', array_merge(request()->except(['page', 'starts_with']), request('starts_with') == $letter ? [] : ['starts_with' => $letter])) }}"
+                                    <a href="{{ route('umkm-binaan', array_merge(request()->except(['page', 'starts_with']), request('starts_with') == $letter ? [] : ['starts_with' => $letter])) }}"
                                        class="px-2 py-1 text-sm rounded-lgtransition-colors {{ request('starts_with') == $letter ? 'text-blue-800 underline' : 'bg-white text-gray-600 hover:bg-gray-50' }}">
                                         {{ $letter }}
                                     </a>
                                 @endforeach
                                 @if(request('starts_with'))
-                                    <a href="{{ route('umkmbinaan', request()->except(['page', 'starts_with'])) }}"
+                                    <a href="{{ route('umkm-binaan', request()->except(['page', 'starts_with'])) }}"
                                        class="px-3 py-1 text-sm rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">
                                         Reset
                                     </a>
@@ -169,7 +169,7 @@
                             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8" id="umkm-grid">
                                 @foreach ($umkms as $umkm)
                                     <!-- UMKM Card -->
-                                    <a href="{{ route('umkm-binaan', $umkm->slug) }}"
+                                    <a href="{{ route('umkm-binaan.show', $umkm->slug) }}"
                                         class="umkm-card bg-white rounded-2xl border border-gray-300 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 p-3 text-center cursor-pointer hover:-translate-y-0.5">
                                         <div class="h-full flex flex-col">
                                             <div class="mb-3 flex justify-center">
@@ -202,7 +202,7 @@
                                 </div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">UMKM tidak ditemukan</h3>
                                 <p class="text-gray-600 mb-4">Coba ubah kata kunci pencarian atau filter yang digunakan</p>
-                                <button type="button" onclick="window.location.href='{{ route('umkmbinaan') }}'" 
+                                <button type="button" onclick="window.location.href='{{ route('umkm-binaan') }}'" 
                                     class="cursor-pointer bg-[#113EA1] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
                                     Reset Pencarian
                                 </button>
@@ -371,7 +371,7 @@
                 function resetFilters() {
                     const currentParams = new URLSearchParams(window.location.search);
                     const search = currentParams.get('search');
-                    const url = new URL("{{ route('umkmbinaan') }}", window.location.origin);
+                    const url = new URL("{{ route('umkm-binaan') }}", window.location.origin);
 
                     if (search) {
                         url.searchParams.set('search', search);

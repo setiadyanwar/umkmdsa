@@ -121,6 +121,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
+                mobileNavLinks.forEach(link => {
+                    link.classList.remove('text-white', 'text-blue-500', 'border-blue-500');
+                    link.classList.add('text-gray-900');
+
+                    if (link.getAttribute('data-route') === currentPage) {
+                        link.classList.add('text-blue-700', 'border-blue-700');
+                        link.classList.remove('text-gray-900');
+                    }
+                });
+
                 mobileMenuButton.classList.remove('text-white', 'hover:text-blue-500');
                 mobileMenuButton.classList.add('text-gray-900', 'hover:text-blue-600');
 

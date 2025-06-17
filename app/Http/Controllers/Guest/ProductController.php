@@ -71,12 +71,12 @@ class ProductController extends Controller
         $products = $query->paginate(12)->withQueryString();
         $categories = ProductCategory::all();
 
-        return view('etalase', compact('products', 'categories'));
+        return view('etalase.index', compact('products', 'categories'));
     }
 
     public function show(Product $product)
     {
         $product->increment('views'); // Increment views untuk terpopuler atau paling banyak dicari
-        return view('single-product', compact('product'));
+        return view('etalase.show', compact('product'));
     }
 }

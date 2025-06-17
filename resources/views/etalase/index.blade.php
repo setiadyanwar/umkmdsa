@@ -211,7 +211,7 @@
                             <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8" id="products-grid">
                                 @foreach ($products as $product)
                                     <!-- Product Card -->
-                                    <a href="{{ route('singleview', $product->slug) }}"
+                                    <a href="{{ route('etalase.show', $product->slug) }}"
                                         class="product-card bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 flex-shrink-0 w-full hover:-translate-y-0.5 cursor-pointer">
                                         <div class="h-full flex flex-col">
                                             <div class="mb-2 flex justify-center">

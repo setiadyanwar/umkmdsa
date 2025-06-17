@@ -19,50 +19,18 @@
     <title>Portal UMKM Binaan DSA - IPB</title>
 
     <style>
-        .price-range-filter {
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-title {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 0.75rem;
-        }
-
-        .range-input-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .price-label {
-            font-size: 0.875rem;
-            color: #4b5563;
-        }
-
-        .min-price,
-        .max-price {
-            width: 5rem;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-        }
-
-        .separator {
-            color: #6b7280;
+        /* Header background transitions */
+        #main-header {
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
         }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen font-lato text-black">
+<body class="font-lato min-h-screen">
 
     @include('components.header')
 
-    <div class="flex-grow">
-        @yield('content')
-    </div>
+    @yield('content')
 
     @include('components.footer')
 
@@ -74,44 +42,6 @@
     <script src="./node_modules/preline/dist/preline.js"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!-- Custom Script -->
-    <script>
-        window.addEventListener('load', () => {
-            (function() {
-                const range = document.querySelector('#hs-pass-values-to-html-elements');
-                if (!range) return;
-                const rangeInstance = new HSRangeSlider(range);
-                const min = document.querySelector('#hs-pass-values-to-html-elements-min-target');
-                const max = document.querySelector('#hs-pass-values-to-html-elements-max-target');
-
-                range.noUiSlider.on('update', (values) => {
-                    min.innerText = rangeInstance.formattedValue[0];
-                    max.innerText = rangeInstance.formattedValue[1];
-                });
-            })();
-        });
-
-        document.querySelectorAll('.min-price, .max-price').forEach(input => {
-            input.addEventListener('change', function() {
-                if (parseInt(this.value) < 0) this.value = 0;
-
-                const minInput = document.querySelector('.min-price');
-                const maxInput = document.querySelector('.max-price');
-
-                if (this.classList.contains('min-price') && parseInt(this.value) > parseInt(maxInput
-                    .value)) {
-                    this.value = maxInput.value;
-                }
-
-                if (this.classList.contains('max-price') && parseInt(this.value) < parseInt(minInput
-                    .value)) {
-                    this.value = minInput.value;
-                }
-            });
-        });
-    </script>
-
 </body>
 
 </html>

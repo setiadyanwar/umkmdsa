@@ -1,4 +1,4 @@
-@extends('layouts.main-app')
+@extends('layouts.app')
 
 @section('title', 'Portal UMKM Binaan DSA - IPB')
 @php
@@ -12,7 +12,7 @@
         <section class="pt-6 md:pt-25 pb-16 md:pb-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6">
                 <div class="flex flex-col md:flex-row gap-8">
-                    <div class="w-full md:w-1/2">
+                    <div class="w-full md:w-1/2 text-white">
                         <div class="mb-4 text-sm md:text-base font-medium">120+ UMKM binaan aktif</div>
                         <h1 class="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-6">
                             Mendorong UMKM<br>
@@ -329,7 +329,7 @@
                         @if($featuredProducts->isNotEmpty())
                             <div class="h-full flex items-stretch gap-4 lg:gap-6 p-2">
                                 @foreach($featuredProducts as $product)
-                                    <a href="{{ route('singleview', $product->slug) }}"
+                                    <a href="{{ route('etalase.show', $product->slug) }}"
                                         class="bg-white rounded-2xl border border-gray-100 hover:border-[#113EA1] hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col"
                                         style="scroll-snap-align: start;">
                                         <div class="h-full flex flex-col w-60 lg:w-72 min-h-[360px]">

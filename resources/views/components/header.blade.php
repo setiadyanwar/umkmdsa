@@ -14,11 +14,11 @@
                 @foreach ([
                     'homepage' => 'Beranda',
                     'etalase' => 'Etalase',
-                    'umkmbinaan' => 'UMKM Binaan',
+                    'umkm-binaan' => 'UMKM Binaan',
                 ] as $route => $label)
                     <li class="group relative">
                         <a href="{{ route($route) }}"
-                            class="nav-link relative transition-all duration-300 pb-2 {{ $currentRoute === $route ? 'font-semibold' : '' }}"
+                            class="nav-link relative transition-all duration-300 pb-2 {{ $currentRoute === $route ? 'font-semibold' : 'hover:text-blue-700' }}"
                             data-route="{{ $route }}">
                             {{ $label }}
                             <span class="nav-indicator absolute bottom-0 left-0 h-0.5 transition-all duration-300 ease-out {{ $currentRoute === $route ? 'w-full' : 'w-0' }}"></span>
@@ -42,11 +42,11 @@
                 @foreach ([
                     'homepage' => 'Beranda',
                     'etalase' => 'Etalase',
-                    'umkmbinaan' => 'UMKM Binaan',
+                    'umkm-binaan' => 'UMKM Binaan',
                 ] as $route => $label)
                     <li class="group">
                         <a href="{{ route($route) }}"
-                            class="mobile-nav-link block font-medium py-2 transition-all duration-300 {{ $currentRoute === $route ? 'font-semibold border-l-4 pl-2' : '' }}"
+                            class="mobile-nav-link block py-2 transition-all duration-300 {{ $currentRoute === $route ? 'font-semibold border-l-4 pl-2' : '' }}"
                             data-route="{{ $route }}">
                             {{ $label }}
                         </a>
