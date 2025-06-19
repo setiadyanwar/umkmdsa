@@ -17,8 +17,11 @@ class Umkm extends Model
         'logo',
         'description',
         'category_id',
-        'location',
+        'province',
+        'city',
         'address',
+        'latitude',
+        'longitude',
         'phone',
         'email',
         'website',
@@ -28,11 +31,12 @@ class Umkm extends Model
         'registered_at',
         'open_hour',
         'close_hour',
-        'map_embed_url'
     ];
 
     protected $casts = [
         'registered_at' => 'datetime',
+        'latitude' => 'float',
+        'longitude' => 'float',
         'open_hour' => 'datetime:H:i',
         'close_hour' => 'datetime:H:i',
     ];

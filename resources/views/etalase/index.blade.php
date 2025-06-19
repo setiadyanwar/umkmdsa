@@ -232,7 +232,9 @@
                                                     </p>
                                                     <div class="flex items-center text-gray-400 text-sm truncate gap-2">
                                                         <i class="fa-solid fa-location-dot"></i>
-                                                        <span>{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                                        <span class="truncate">
+                                                            {{ $product->umkm->city . ", " . $product->umkm->province }}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>

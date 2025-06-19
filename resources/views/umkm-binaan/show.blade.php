@@ -50,7 +50,9 @@
                                     <p
                                         class="text-gray-600 text-sm sm:text-base flex items-center justify-center sm:justify-start mt-2">
                                         <i class="fas fa-map-marker-alt mr-2 text-gray-500"></i>
-                                        <span class="truncate">{{ $umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                        <span class="truncate">
+                                            {{ $umkm->city . ", " . $umkm->province }}
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -198,7 +200,9 @@
                                                     </p>
                                                     <div class="flex items-center text-gray-400 text-sm truncate gap-2">
                                                         <i class="fa-solid fa-location-dot"></i>
-                                                        <span>{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                                        <span class="truncate">
+                                                            {{ $product->umkm->city . ", " . $product->umkm->province }}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -422,7 +426,9 @@
                                                                 </p>
                                                                 <div class="flex items-center text-gray-400 text-sm truncate gap-2">
                                                                     <i class="fa-solid fa-location-dot"></i>
-                                                                    <span>{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                                                    <span class="truncate">
+                                                                        {{ $product->umkm->city . ", " . $product->umkm->province }}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -533,12 +539,12 @@
 
                             <div>
                                 {{-- Alamat --}}
-                                @if ($umkm->address || $umkm->location)
+                                @if ($umkm->address || $umkm->city || $umkm->province)
                                     <h3 class="text-lg font-semibold mb-4 text-gray-800">Alamat</h3>
                                     <p class="text-gray-600 mb-4">
-                                        {{ $umkm->address }}
-                                        {{ $umkm->address && $umkm->location ? ',' : '' }}
-                                        {{ $umkm->location }}
+                                        {{ $umkm->address }},
+                                        {{ $umkm->city }},
+                                        {{ $umkm->province }}
                                     </p>
                                 @endif
 

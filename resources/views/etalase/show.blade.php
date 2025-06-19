@@ -69,7 +69,9 @@
                                         d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="truncate">{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                <span class="truncate">
+                                    {{ $product->umkm->city . ", " . $product->umkm->province }}
+                                </span>
                             </div>
                         </div>
                         <button id="share-product"
@@ -183,7 +185,9 @@
                                             d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    <span class="truncate">{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                    <span class="truncate">
+                                        {{ $product->umkm->city . ", " . $product->umkm->province }}
+                                    </span>
                                 </div>
                             </div>
                             <div class="flex-shrink-0">
@@ -226,8 +230,9 @@
                                 <!-- Location -->
                                 <div class="flex items-center text-gray-400 text-sm truncate gap-2 mb-4 md:mb-6">
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span
-                                        class="text-xs md:text-sm">{{ $product->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                    <span class="truncate text-xs md:text-sm">
+                                        {{ $product->umkm->city . ", " . $product->umkm->province }}
+                                    </span>
                                 </div>
 
                                 <!-- View All Button -->
@@ -262,7 +267,9 @@
                                                         </p>
                                                         <div class="flex items-center text-gray-400 text-sm truncate gap-2">
                                                             <i class="fa-solid fa-location-dot"></i>
-                                                            <span>{{ $relatedProduct->umkm->location ?? 'Lokasi tidak tersedia' }}</span>
+                                                            <span class="truncate">
+                                                                {{ $relatedProduct->umkm->city . ", " . $relatedProduct->umkm->province }}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>

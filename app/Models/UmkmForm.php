@@ -16,8 +16,11 @@ class UmkmForm extends Model
         'description',
         'category_id',
         'started_at',
-        'location',
+        'province',
+        'city',
         'address',
+        'latitude',
+        'longitude',
         'phone',
         'email',
         'website',
@@ -26,12 +29,13 @@ class UmkmForm extends Model
         'facebook',
         'open_hour',
         'close_hour',
-        'map_embed_url',
         'status',
     ];
 
     protected $casts = [
         'started_at' => 'date',
+        'latitude' => 'float',
+        'longitude' => 'float',
         'open_hour' => 'datetime:H:i',
         'close_hour' => 'datetime:H:i',
     ];

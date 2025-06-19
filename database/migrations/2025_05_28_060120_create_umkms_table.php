@@ -17,8 +17,11 @@ return new class extends Migration {
             $table->string('logo')->nullable();
             $table->text('description')->nullable();
             $table->foreignId('category_id')->constrained('umkm_categories')->onDelete('restrict');
-            $table->string('location');
+            $table->string('province');
+            $table->string('city');
             $table->string('address');
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->string('phone');
             $table->string('email')->nullable();
             $table->string('website')->nullable();
@@ -29,7 +32,6 @@ return new class extends Migration {
             $table->time('open_hour')->nullable();
             $table->time('close_hour')->nullable();
             $table->integer('total_products')->default(0);
-            $table->text('map_embed_url')->nullable();
             $table->timestamps();
         });
     }

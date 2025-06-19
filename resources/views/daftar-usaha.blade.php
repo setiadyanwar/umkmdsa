@@ -4,8 +4,8 @@
     use Carbon\Carbon;
     $currentRoute = 'daftar-usaha';
     $expiresAt = $expiresAt ?? null;
-    $isTokenValid = $isTokenValid ?? false;
-    $timeRemaining = $isTokenValid && $expiresAt ? now()->diffInSeconds($expiresAt, false) : 0;
+    $tokenStatus = $tokenStatus ?? 'none';
+    $timeRemaining = $tokenStatus === 'valid' && $expiresAt ? now()->diffInSeconds($expiresAt, false) : 0;
 @endphp
 
 @section('content')
@@ -27,7 +27,21 @@
 
             <!-- Token Status & Countdown -->
             <div class="mb-6">
-                @if($isTokenValid)
+                @if($tokenStatus === 'none')
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-red-800 font-medium">Token Formulir Tidak Ditemukan</span>
+                        </div>
+                        <p class="text-sm text-red-700 mt-2">
+                            Anda belum memasukkan token untuk mengakses formulir ini.<br>
+                            Silakan hubungi admin untuk mendapatkan token pendaftaran usaha.
+                        </p>
+                    </div>
+                @elseif($tokenStatus === 'valid')
                     <div class="bg-green-50 border border-green-200 rounded-lg p-4">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
@@ -50,7 +64,22 @@
                             formulir ini.
                         </p>
                     </div>
-                @else
+                @elseif($tokenStatus === 'used')
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="text-yellow-800 font-medium">Terima kasih, formulir sudah dikirim</span>
+                        </div>
+                        <p class="text-sm text-yellow-700 mt-2">
+                            Data usaha Anda sudah kami terima.<br>
+                            Tim kami akan menghubungi Anda untuk proses selanjutnya.<br>
+                            Jika ada pertanyaan, silakan hubungi admin melalui kontak yang tersedia.
+                        </p>
+                    </div>
+                @elseif($tokenStatus === 'expired' || $tokenStatus === 'invalid')
                     <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,10 +95,10 @@
                 @endif
             </div>
 
-            <div class="bg-white rounded-2xl overflow-hidden {{ !$isTokenValid ? 'opacity-50 pointer-events-none' : '' }}">
+            <div class="bg-white rounded-2xl overflow-hidden {{ $tokenStatus !== 'valid' ? 'opacity-50 pointer-events-none' : '' }}">
                 <form id="business-registration-form" class="grid grid-cols-1 lg:grid-cols-2 gap-6" method="POST"
                     action="{{ route('daftar-usaha.store', ['token' => $token]) }}" enctype="multipart/form-data"
-                    {{ !$isTokenValid ? 'style=pointer-events:none;opacity:0.5;' : '' }}>
+                    {{ $tokenStatus !== 'valid' ? 'style=pointer-events:none;opacity:0.5;' : '' }}>
                     @csrf
 
                     <!-- Hidden token field -->
@@ -170,7 +199,7 @@
                         <!-- Location -->
                         <div>
                             <label for="location" class="block font-medium text-gray-700">
-                                Lokasi usaha<span class="text-red-500">*</span>
+                                Lokasi usaha
                             </label>
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-sm text-gray-600">Gunakan lokasimu saat ini?</span>
@@ -365,7 +394,7 @@
                             <button type="submit"
                                 class="w-full py-3 px-6 rounded-lg font-medium flex items-center justify-center
                                     transition-colors duration-200 text-white bg-gray-400 cursor-not-allowed"
-                                {{ !$isTokenValid ? 'disabled' : '' }}>                            
+                                {{ $tokenStatus !== 'valid' ? 'disabled' : '' }}>                            
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
@@ -577,9 +606,12 @@
                 const requiredFields = form.querySelectorAll('[required]');
                 let isValid = true;
                 requiredFields.forEach(field => {
-                    if (!field.value.trim()) isValid = false;
+                    if (field.type === 'checkbox') {
+                        if (!field.checked) isValid = false;
+                    } else {
+                        if (!field.value.trim()) isValid = false;
+                    }
                 });
-                if (!selectedLat || !selectedLng) isValid = false;
                 if (isValid) {
                     submitBtn.disabled = false;
                     submitBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
@@ -594,28 +626,31 @@
             form.addEventListener('change', validateForm);
 
             // File upload
-            fileUpload.addEventListener('change', function (e) {
+            function handleFileUploadChange(e) {
                 const files = Array.from(e.target.files);
-                const uploadArea = fileUpload.closest('.border-dashed');
+                const uploadArea = e.target.closest('.border-dashed');
+                let info = uploadArea.querySelector('.file-info');
+                if (!info) {
+                    info = document.createElement('div');
+                    info.className = 'file-info mt-2';
+                    uploadArea.appendChild(info);
+                }
+                if (files.length > 5) {
+                    info.innerHTML = `<p class="text-red-600 mb-1">Maksimal 5 file saja.</p>`;
+                    e.target.value = ""; // reset input
+                    return;
+                }
                 if (files.length > 0) {
                     const fileList = files.map(file => file.name).join(', ');
-                    uploadArea.innerHTML = `
-                        <div class="flex flex-col items-center">
-                            <svg class="w-12 h-12 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <p class="text-green-600 mb-2">${files.length} file(s) dipilih</p>
-                            <p class="text-sm text-gray-500 mb-2">${fileList}</p>
-                            <label for="file-upload" class="cursor-pointer bg-blue-50 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors">
-                                Ganti File
-                            </label>
-                            <input type="file" id="file-upload" name="documents[]" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" class="hidden">
-                        </div>
+                    info.innerHTML = `
+                        <p class="text-green-600 mb-1">${files.length} file(s) dipilih</p>
+                        <p class="text-sm text-gray-500">${fileList}</p>
                     `;
-                    // Re-attach event listener for new input
-                    uploadArea.querySelector('input[type="file"]').addEventListener('change', arguments.callee);
+                } else {
+                    info.innerHTML = '';
                 }
-            });
+            }
+            fileUpload.addEventListener('change', handleFileUploadChange);
 
             // Location toggle
             useLocationToggle.addEventListener('change', function () {
@@ -637,11 +672,6 @@
 
             // Form submission
             form.addEventListener('submit', function (e) {
-                if (!selectedLat || !selectedLng) {
-                    alert('Silakan pilih lokasi pada peta terlebih dahulu.');
-                    e.preventDefault();
-                    return;
-                }
                 submitBtn.innerHTML = `
                     <svg class="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

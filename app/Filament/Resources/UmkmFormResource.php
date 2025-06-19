@@ -90,11 +90,6 @@ class UmkmFormResource extends Resource
                                         ])
                                 ]),
 
-                            TextInput::make('location')
-                                ->label('Lokasi')
-                                ->placeholder('Contoh: Kota Bogor, Jawa Barat')
-                                ->required(),
-
                             DatePicker::make('started_at')
                                 ->label('Tanggal Mulai Usaha')
                                 ->required(),
@@ -164,14 +159,33 @@ class UmkmFormResource extends Resource
                                 ->withoutSeconds(),
                         ]),
 
+                        TextInput::make('province')
+                            ->label('Provinsi')
+                            ->placeholder('Contoh: Jawa Barat')
+                            ->required(),
+
+                        TextInput::make('city')
+                            ->label('Kota/Kabupaten')
+                            ->placeholder('Contoh: Kota Bogor')
+                            ->required(),
+
                         TextInput::make('address')
-                            ->label('Alamat')
+                            ->label('Alamat Lengkap')
                             ->placeholder('Alamat lengkap usaha')
                             ->required(),
 
-                        TextInput::make('map_embed_url')
-                            ->label('Embed Google Maps')
-                            ->placeholder('URL Google Maps')
+                        TextInput::make('latitude')
+                            ->label('Latitude')
+                            ->placeholder('Latitude alamat')
+                            ->numeric()
+                            ->step(0.0000001)
+                            ->nullable(),
+                        
+                        TextInput::make('longitude')
+                            ->label('Longitude')
+                            ->placeholder(placeholder: 'Longitude alamat')
+                            ->numeric()
+                            ->step(0.0000001)
                             ->nullable(),
                     ])
                     ->columns(1),
@@ -193,10 +207,16 @@ class UmkmFormResource extends Resource
                                     ->downloadable()
                                     ->previewable()
                                     ->openable()
-                                    ->acceptedFileTypes(['application/pdf', 'image/png', 'image/jpeg'])
+                                    ->acceptedFileTypes([
+                                        'application/pdf',
+                                        'image/png',
+                                        'image/jpeg',
+                                        'application/msword', // .doc
+                                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', // .docx
+                                    ])
                                     ->maxSize(2048)
                                     ->required()
-                                    ->helperText('Format: PDF, JPG, atau PNG. Maksimum 2MB per file.')
+                                    ->helperText('Format: PDF, DOC, JPG, atau PNG. Maksimum 2MB per file.')
                             ])
                             ->label('Lampiran')
                             ->addActionLabel('Tambah File')

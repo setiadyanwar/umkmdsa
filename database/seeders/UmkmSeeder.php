@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Umkm;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Str;
+use Illuminate\Support\Str;
 
 class UmkmSeeder extends Seeder
 {
@@ -22,8 +21,9 @@ class UmkmSeeder extends Seeder
                 'slug' => Str::slug('Batik Nusantara'),
                 'category_id' => 1,
                 'description' => 'Menjual batik tradisional khas Yogyakarta dengan motif eksklusif dan kualitas premium.',
-                'location' => 'Yogyakarta',
-                'address' => 'Jl. Malioboro No.10, Yogyakarta',
+                'province' => 'DI Yogyakarta',
+                'city' => 'Yogyakarta',
+                'address' => 'Jl. Malioboro No.10',
                 'phone' => '081234567890',
                 'email' => 'info@batiknusantara.com',
                 'website' => 'https://batiknusantara.com',
@@ -35,15 +35,15 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '18:00',
                 'total_products' => 25,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
             [
                 'name' => 'Hijab Modernku',
                 'slug' => Str::slug('Hijab Modernku'),
                 'category_id' => 1,
                 'description' => 'Toko hijab kekinian dengan berbagai model instan dan pashmina untuk remaja.',
-                'location' => 'Bandung',
-                'address' => 'Jl. Dago Atas No.7, Bandung',
+                'province' => 'Jawa Barat',
+                'city' => 'Bandung',
+                'address' => 'Jl. Dago Atas No.7',
                 'phone' => '081298765432',
                 'email' => null,
                 'website' => null,
@@ -55,7 +55,6 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '20:00',
                 'total_products' => 40,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
 
             // Kerajinan Kriya
@@ -64,8 +63,9 @@ class UmkmSeeder extends Seeder
                 'slug' => Str::slug('Kriya Kayu Lestari'),
                 'category_id' => 2,
                 'description' => 'Kerajinan tangan dari kayu jati dan mahoni, cocok untuk dekorasi rumah dan kantor.',
-                'location' => 'Jepara',
-                'address' => 'Jl. Ukir No.21, Jepara',
+                'province' => 'Jawa Tengah',
+                'city' => 'Jepara',
+                'address' => 'Jl. Ukir No.21',
                 'phone' => '082123456789',
                 'email' => 'info@kriyakayu.id',
                 'website' => null,
@@ -77,15 +77,15 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '17:00',
                 'total_products' => 18,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
             [
                 'name' => 'Anyaman Bambu Asri',
                 'slug' => Str::slug('Anyaman Bambu Asri'),
                 'category_id' => 2,
                 'description' => 'Produk anyaman bambu seperti keranjang, tempat tisu, dan dekorasi rumah ramah lingkungan.',
-                'location' => 'Tasikmalaya',
-                'address' => 'Desa Rajapolah No.5, Tasikmalaya',
+                'province' => 'Jawa Barat',
+                'city' => 'Tasikmalaya',
+                'address' => 'Desa Rajapolah No.5',
                 'phone' => '082198123456',
                 'email' => null,
                 'website' => null,
@@ -97,7 +97,6 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '16:00',
                 'total_products' => 30,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
 
             // Jasa
@@ -106,8 +105,9 @@ class UmkmSeeder extends Seeder
                 'slug' => Str::slug('Service Laptop Jogja'),
                 'category_id' => 3,
                 'description' => 'Layanan servis laptop, instalasi software, dan upgrade hardware profesional.',
-                'location' => 'Yogyakarta',
-                'address' => 'Jl. Kaliurang KM 7 No.12, Sleman',
+                'province' => 'DI Yogyakarta',
+                'city' => 'Sleman',
+                'address' => 'Jl. Kaliurang KM 7 No.12',
                 'phone' => '085232123123',
                 'email' => 'servisjogja@gmail.com',
                 'website' => null,
@@ -119,15 +119,15 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '18:00',
                 'total_products' => 0,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
             [
                 'name' => 'Laundry Express Cuci Bersih',
                 'slug' => Str::slug('Laundry Express Cuci Bersih'),
                 'category_id' => 3,
                 'description' => 'Layanan laundry kilat dengan antar jemput gratis di area Jabodetabek.',
-                'location' => 'Jakarta',
-                'address' => 'Jl. Kemang Raya No.4, Jakarta Selatan',
+                'province' => 'DKI Jakarta',
+                'city' => 'Jakarta Selatan',
+                'address' => 'Jl. Kemang Raya No.4',
                 'phone' => '085678910111',
                 'email' => 'cs@cucibersih.id',
                 'website' => 'https://cucibersih.id',
@@ -139,7 +139,6 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '21:00',
                 'total_products' => 0,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
 
             // Kesehatan & Kecantikan
@@ -148,8 +147,9 @@ class UmkmSeeder extends Seeder
                 'slug' => Str::slug('Herbal Sehat Alami'),
                 'category_id' => 4,
                 'description' => 'Menyediakan produk herbal alami seperti madu, jamu, dan suplemen tradisional.',
-                'location' => 'Bogor',
-                'address' => 'Jl. Cibinong Raya No.9, Bogor',
+                'province' => 'Jawa Barat',
+                'city' => 'Bogor',
+                'address' => 'Jl. Cibinong Raya No.9',
                 'phone' => '087812345678',
                 'email' => 'herbalalami@gmail.com',
                 'website' => null,
@@ -161,15 +161,15 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '17:00',
                 'total_products' => 12,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
             [
                 'name' => 'Beauty Glow Skincare',
                 'slug' => Str::slug('Beauty Glow Skincare'),
                 'category_id' => 4,
                 'description' => 'Skincare lokal dengan kandungan natural, cocok untuk semua jenis kulit.',
-                'location' => 'Surabaya',
-                'address' => 'Jl. Tunjungan No.33, Surabaya',
+                'province' => 'Jawa Timur',
+                'city' => 'Surabaya',
+                'address' => 'Jl. Tunjungan No.33',
                 'phone' => '085811223344',
                 'email' => 'glowskincare@beauty.id',
                 'website' => 'https://beautyglowskin.id',
@@ -181,7 +181,6 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '18:00',
                 'total_products' => 15,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
 
             // Handphone & Aksesoris
@@ -190,8 +189,9 @@ class UmkmSeeder extends Seeder
                 'slug' => Str::slug('Gadget Mart'),
                 'category_id' => 5,
                 'description' => 'Toko handphone dan aksesoris original, lengkap dengan layanan garansi resmi.',
-                'location' => 'Semarang',
-                'address' => 'Jl. Pandanaran No.5, Semarang',
+                'province' => 'Jawa Tengah',
+                'city' => 'Semarang',
+                'address' => 'Jl. Pandanaran No.5',
                 'phone' => '081234000123',
                 'email' => 'cs@gadgetmart.co.id',
                 'website' => 'https://gadgetmart.co.id',
@@ -203,15 +203,15 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '21:00',
                 'total_products' => 60,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
             [
                 'name' => 'Aksesoris HP Murah',
                 'slug' => Str::slug('Aksesoris HP Murah'),
                 'category_id' => 5,
                 'description' => 'Menjual casing, tempered glass, dan kabel charger dengan harga terjangkau.',
-                'location' => 'Depok',
-                'address' => 'Jl. Margonda Raya No.100, Depok',
+                'province' => 'Jawa Barat',
+                'city' => 'Depok',
+                'address' => 'Jl. Margonda Raya No.100',
                 'phone' => '081299988877',
                 'email' => null,
                 'website' => null,
@@ -223,7 +223,6 @@ class UmkmSeeder extends Seeder
                 'close_hour' => '19:00',
                 'total_products' => 80,
                 'logo' => null,
-                'map_embed_url' => null,
             ],
         ];
 

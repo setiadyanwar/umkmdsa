@@ -77,11 +77,6 @@ class UmkmResource extends Resource
                                     ])
                             ]),
 
-                        TextInput::make('location')
-                            ->label('Lokasi')
-                            ->placeholder('Contoh: Kota Bogor, Jawa Barat')
-                            ->required(),
-
                         DatePicker::make('registered_at')
                             ->label('Tanggal Terdaftar')
                             ->required()
@@ -152,14 +147,33 @@ class UmkmResource extends Resource
                             ->withoutSeconds(),
                     ]),
 
+                    TextInput::make('province')
+                        ->label('Provinsi')
+                        ->placeholder('Contoh: Jawa Barat')
+                        ->required(),
+
+                    TextInput::make('city')
+                        ->label('Kota/Kabupaten')
+                        ->placeholder('Contoh: Kota Bogor')
+                        ->required(),
+
                     TextInput::make('address')
-                        ->label('Alamat')
+                        ->label('Alamat Lengkap')
                         ->placeholder('Alamat lengkap usaha')
                         ->required(),
 
-                    TextInput::make('map_embed_url')
-                        ->label('Embed Google Maps')
-                        ->placeholder('URL Google Maps')
+                    TextInput::make('latitude')
+                        ->label('Latitude')
+                        ->placeholder('Latitude alamat')
+                        ->numeric()
+                        ->step(0.0000001)
+                        ->nullable(),
+                    
+                    TextInput::make('longitude')
+                        ->label('Longitude')
+                        ->placeholder(placeholder: 'Longitude alamat')
+                        ->numeric()
+                        ->step(0.0000001)
                         ->nullable(),
                 ])
                 ->columns(1),
@@ -182,9 +196,6 @@ class UmkmResource extends Resource
 
                 TextColumn::make('category.name')
                     ->label('Kategori'),
-
-                TextColumn::make('location')
-                    ->label('Lokasi'),
                     
                 TextColumn::make('registered_at')
                     ->label(label: 'Terdaftar Pada')

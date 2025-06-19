@@ -7,6 +7,7 @@ use App\Models\UmkmCategory;
 use App\Models\UmkmForm;
 use App\Models\UmkmFormToken;
 use Illuminate\Http\Request;
+use Str;
 
 class UmkmFormController extends Controller
 {
@@ -14,21 +15,29 @@ class UmkmFormController extends Controller
     {
         $tokenValue = $request->query('token');
         $token = null;
-        $isTokenValid = false;
+        $tokenStatus = 'none';
         $expiresAt = null;
 
         if ($tokenValue) {
             $token = UmkmFormToken::where('token', $tokenValue)->first();
-            if ($token && !$token->used && $token->expires_at > now()) {
-                $isTokenValid = true;
-                $expiresAt = $token->expires_at;
+            if ($token) {
+                if ($token->used) {
+                    $tokenStatus = 'used';
+                } elseif ($token->expires_at <= now()) {
+                    $tokenStatus = 'expired';
+                } else {
+                    $tokenStatus = 'valid';
+                    $expiresAt = $token->expires_at;
+                }
+            } else {
+                $tokenStatus = 'invalid';
             }
         }
 
         $categories = UmkmCategory::all();
 
         return view('daftar-usaha', [
-            'isTokenValid' => $isTokenValid,
+            'tokenStatus' => $tokenStatus,
             'expiresAt' => $expiresAt,
             'token' => $tokenValue,
             'categories' => $categories,
@@ -48,8 +57,11 @@ class UmkmFormController extends Controller
             'description' => 'nullable|string',
             'category_id' => 'required|exists:umkm_categories,id',
             'started_at' => 'required|date',
-            'location' => 'required|string',
+            'province' => 'required|string',
+            'city' => 'required|string',
             'address' => 'required|string',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'phone' => 'required|string',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
@@ -58,7 +70,8 @@ class UmkmFormController extends Controller
             'facebook' => 'nullable|string',
             'open_hour' => 'nullable|date_format:H:i',
             'close_hour' => 'nullable|date_format:H:i',
-            'map_embed_url' => 'nullable|string',
+            'documents' => 'nullable|array|max:5',
+            'documents.*' => 'nullable|file|max:2048|mimes:pdf,jpg,jpeg,png,doc,docx',
         ]);
 
         // Cek token jika diisi
@@ -80,7 +93,23 @@ class UmkmFormController extends Controller
         }
 
         // Simpan data form
-        UmkmForm::create($data);
+        $umkmForm = UmkmForm::create($data);
+
+        // Simpan lampiran jika ada
+        if ($request->hasFile('documents')) {
+            foreach ($request->file('documents') as $file) {
+                $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $uuid = Str::random(6);
+                $filename = Str::slug($originalName) . '-' . $uuid . '.' . $extension;
+
+                $path = $file->storeAs('form_attachments', $filename, 'public');
+
+                $umkmForm->attachments()->create([
+                    'file_path' => $path,
+                ]);
+            }
+        }
 
         return redirect()->back()->with('success', 'Form berhasil dikirim.');
     }
