@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Models\UmkmCategory;
 use App\Models\UmkmForm;
 use App\Models\UmkmFormToken;
 use Illuminate\Http\Request;
@@ -11,8 +12,27 @@ class UmkmFormController extends Controller
 {
     public function create(Request $request)
     {
-        $token = $request->query('token');
-        return view('guest.umkm_form.create', compact('token')); // TODO: Sesuaikan path view
+        $tokenValue = $request->query('token');
+        $token = null;
+        $isTokenValid = false;
+        $expiresAt = null;
+
+        if ($tokenValue) {
+            $token = UmkmFormToken::where('token', $tokenValue)->first();
+            if ($token && !$token->used && $token->expires_at > now()) {
+                $isTokenValid = true;
+                $expiresAt = $token->expires_at;
+            }
+        }
+
+        $categories = UmkmCategory::all();
+
+        return view('daftar-usaha', [
+            'isTokenValid' => $isTokenValid,
+            'expiresAt' => $expiresAt,
+            'token' => $tokenValue,
+            'categories' => $categories,
+        ]);
     }
 
 
@@ -27,6 +47,7 @@ class UmkmFormController extends Controller
             'logo' => 'nullable|image|max:2048',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:umkm_categories,id',
+            'started_at' => 'required|date',
             'location' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string',
@@ -35,9 +56,8 @@ class UmkmFormController extends Controller
             'instagram' => 'nullable|string',
             'tiktok' => 'nullable|string',
             'facebook' => 'nullable|string',
-            'registered_at' => 'required|date',
-            'open_hour' => 'required',
-            'close_hour' => 'required',
+            'open_hour' => 'nullable|date_format:H:i',
+            'close_hour' => 'nullable|date_format:H:i',
             'map_embed_url' => 'nullable|string',
         ]);
 

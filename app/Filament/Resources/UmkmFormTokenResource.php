@@ -89,7 +89,7 @@ class UmkmFormTokenResource extends Resource
                     ->icon('heroicon-o-plus')
                     ->color('primary')
                     ->modalHeading('Token Berhasil Dibuat')
-                    ->modalDescription('Token ini akan kedaluwarsa dalam 2 jam.')
+                    ->modalDescription('Token ini akan kedaluwarsa dalam 24 jam.')
                     ->modalSubmitAction(false)
                     ->modalCancelActionLabel('Tutup')
                     ->modalWidth('lg')
@@ -116,17 +116,17 @@ class UmkmFormTokenResource extends Resource
 
                         Placeholder::make('token_info')
                             ->label('Informasi Token')
-                            ->content('Token akan kedaluwarsa dalam 2 jam dan hanya dapat digunakan sekali.'),
+                            ->content('Token akan kedaluwarsa dalam 24 jam dan hanya dapat digunakan sekali.'),
                     ])
                     ->fillForm(function () {
                         $token = UmkmFormToken::create([
                             'token' => Str::uuid(),
-                            'expires_at' => now()->addHours(2),
+                            'expires_at' => now()->addHours(24),
                             'used' => false,
                         ]);
 
                         return [
-                            'token_url' => url('/form?token=' . $token->token) // TODO: Sesuaikan URL dengan path views nanti
+                            'token_url' => url('/daftar-usaha?token=' . $token->token)
                         ];
                     })
                     ->after(function () {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Guest\ProductController;
 use App\Http\Controllers\Guest\UmkmController;
+use App\Http\Controllers\Guest\UmkmFormController;
 use App\Models\Product;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\Route;
@@ -21,20 +22,9 @@ Route::get('/umkm-binaan', [UmkmController::class, 'index'])->name('umkm-binaan'
 
 Route::get('/umkm-binaan/{umkm:slug}', [UmkmController::class, 'show'])->name('umkm-binaan.show');
 
+Route::get('/daftar-usaha', [UmkmFormController::class, 'create'])->name('daftar-usaha');
+Route::post('/daftar-usaha', [UmkmFormController::class, 'store'])->name('daftar-usaha.store');
+
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
-
-Route::get('/daftar-usaha', function () {
-    return view('daftar-usaha');
-})->name('daftarusaha');
-// Route::get('/daftar-usaha/{token}', 'DaftarUsahaController@showForm')->name('daftar-usaha.form');
-// Route::post('/daftar-usaha/{token}', 'DaftarUsahaController@submitForm')->name('daftar-usaha.submit');
-
-// Route::get('/product', function () {
-//     return view('single-product');
-// })->name('etalase.show');
-
-// Route::get('/umkm-binaan.show/{umkm:slug}', function () {
-//     return view('profile-store.main-profile');
-// })->name('umkm-binaan.show');
