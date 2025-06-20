@@ -256,10 +256,12 @@
                     </div>
 
                     <!-- CTA Button -->
-                    <button
-                        class="cursor-pointer w-full bg-[#113EA1] hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-3xl transition-colors duration-200">
-                        Selengkapnya
-                    </button>
+                    <a href="https://agromaritim.ipb.ac.id/">
+                        <button
+                            class="cursor-pointer w-full bg-[#113EA1] hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-3xl transition-colors duration-200">
+                            Selengkapnya
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -316,6 +318,7 @@
                     Lihat Semua
                 </a>
             </div>
+            
 
             <!-- Main Content Container -->
             <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden">
