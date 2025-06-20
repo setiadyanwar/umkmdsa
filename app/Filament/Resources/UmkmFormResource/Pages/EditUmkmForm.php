@@ -7,6 +7,7 @@ use App\Models\Umkm;
 use Filament\Actions;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Storage;
 
 class EditUmkmForm extends EditRecord
 {
@@ -58,8 +59,22 @@ class EditUmkmForm extends EditRecord
 
                     $record->update(['status' => 'accepted']);
 
+                    // Pindah file logo jika ada
+                    $logoPath = null;
+
+                    if ($record->logo) {
+                        if (Storage::disk('public')->exists(path: $record->logo)) {
+                            $newFilename = basename($record->logo);
+                            $newPath = 'logos/' . $newFilename;
+
+                            Storage::disk('public')->copy($record->logo, $newPath);
+                            $logoPath = $newPath;
+                        }
+                    }
+
                     Umkm::create([
                         'name' => $record->name,
+                        'logo' => $logoPath,
                         'category_id' => $record->category_id,
                         'province' => $record->province,
                         'city' => $record->city,
@@ -73,7 +88,7 @@ class EditUmkmForm extends EditRecord
                         'tiktok' => $record->tiktok,
                         'facebook' => $record->facebook,
                         'description' => $record->description,
-                        'registered_at' => $record->started_at,
+                        'registered_at' => now(),
                         'open_hour' => $record->open_hour,
                         'close_hour' => $record->close_hour,
                     ]);

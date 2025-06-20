@@ -7,7 +7,7 @@ use App\Models\UmkmCategory;
 use App\Models\UmkmForm;
 use App\Models\UmkmFormToken;
 use Illuminate\Http\Request;
-use Str;
+use Illuminate\Support\Str;
 
 class UmkmFormController extends Controller
 {

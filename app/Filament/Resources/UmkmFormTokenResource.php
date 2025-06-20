@@ -16,7 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Str;
+use Illuminate\Support\Str;
 
 class UmkmFormTokenResource extends Resource
 {
