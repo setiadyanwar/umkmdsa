@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\UmkmCategory;
-use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Str;
+use Illuminate\Support\Str;
 
 class UmkmCategorySeeder extends Seeder
 {
