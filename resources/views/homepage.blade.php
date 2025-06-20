@@ -70,7 +70,7 @@
 
         <!-- Programs Section -->
         <section
-            class="relative py-16 md:py-20 bg-linear-to-t from-[#04112F] via-[#04112F] to-transparent bg-gradient-to-b to-white">
+            class="relative py-16 md:py-20 bg-linear-to-t from-[#04112F] via-[#04112F] bg-gradient-to-b to-white">
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 z-20">
                 <div class="text-center mb-12">
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 text-white">Program Pelatihan
