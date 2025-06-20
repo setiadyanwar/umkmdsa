@@ -24,18 +24,16 @@
                             inspiratif, dan peluang kolaborasi untuk pertumbuhan usaha yang
                             berkelanjutan.
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-4 w-full sm:w-auto justify-content items-start">
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-4 w-full sm:w-auto justify-start items-start">
                             <a href="#"
                                 class="bg-[#113EA1] hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-2xl inline-flex items-center transition">
                                 Telusuri UMKM
-                                <img src="{{ asset('images/arrow.png') }}" style="width: 24px; height: auto;" class="ml-2"
-                                    alt="">
+                                <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
                             <a href="#"
                                 class="bg-transparent border border-white text-white font-medium py-3 px-6 rounded-2xl inline-flex items-center hover:bg-white/10 transition flex-row">
                                 Daftarkan usahamu
-                                <img src="{{ asset('images/whatsapp.png') }}" style="width: 24px; height: auto;"
-                                    class="ml-2" alt="">
+                                <i class="fa-brands fa-whatsapp ml-2 text-lg"></i>
                             </a>
                         </div>
                     </div>
@@ -615,7 +613,7 @@
                 <button
                     class="mt-4 bg-[#113EA1] text-white cursor-pointer font-semibold px-4 py-2 rounded-xl flex items-center gap-2 hover:bg-blue-800 transition">
                     Live Chat
-                    <img src="{{ asset('images/chat.png') }}" class="w-6 h-6" alt="chat">
+                    <i class="fa-regular fa-message"></i>
                 </button>
             </div>
 

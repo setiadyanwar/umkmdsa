@@ -498,7 +498,11 @@
 
                                         @if ($umkm->website)
                                             <span class="pr-2">Website</span>
-                                            <span class="pl-2">: {{ $umkm->website }}</span>
+                                                <span class="pl-2">:
+                                                    <a href="{{ $umkm->website }}" class="text-blue-600 hover:text-blue-800" target="_blank">
+                                                        {{ parse_url($umkm->website, PHP_URL_HOST) ?? $umkm->website }}
+                                                    </a>
+                                                </span>
                                         @endif
                                     </div>
                                 @endif
@@ -511,7 +515,7 @@
                                             <span class="pr-2">Instagram</span>
                                             <span class="pl-2">:
                                                 <a href="{{ $umkm->instagram }}" class="text-blue-600 hover:text-blue-800" target="_blank">
-                                                    {{ $umkm->instagram }}
+                                                    {{ '@' . Str::afterLast(rtrim($umkm->instagram, '/'), '/') }}
                                                 </a>
                                             </span>
                                         @endif
@@ -520,7 +524,7 @@
                                             <span class="pr-2">TikTok</span>
                                             <span class="pl-2">:
                                                 <a href="{{ $umkm->tiktok }}" class="text-blue-600 hover:text-blue-800" target="_blank">
-                                                    {{ $umkm->tiktok }}
+                                                    {{ Str::afterLast(rtrim($umkm->tiktok, '/'), '/') }}
                                                 </a>
                                             </span>
                                         @endif
@@ -529,7 +533,7 @@
                                             <span class="pr-2">Facebook</span>
                                             <span class="pl-2">:
                                                 <a href="{{ $umkm->facebook }}" class="text-blue-600 hover:text-blue-800" target="_blank">
-                                                    {{ $umkm->facebook }}
+                                                    {{ Str::afterLast(rtrim($umkm->facebook, '/'), '/') }}
                                                 </a>
                                             </span>
                                         @endif
@@ -549,10 +553,10 @@
                                 @endif
 
                                 {{-- Map --}}
-                                @if ($umkm->map_embed_url)
+                                @if ($umkm->latitude && $umkm->longitude)
                                     <div class="rounded-lg h-64 overflow-hidden">
                                         <iframe
-                                            src="{{ $umkm->map_embed_url }}"
+                                            src="https://www.google.com/maps?q={{ $umkm->latitude }},{{ $umkm->longitude }}&hl=id&z=16&output=embed"
                                             class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy"
                                             referrerpolicy="no-referrer-when-downgrade">
                                         </iframe>
