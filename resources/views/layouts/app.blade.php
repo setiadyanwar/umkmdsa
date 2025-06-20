@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="current-route" content="{{ Route::currentRouteName() }}">
 
+    <title>@yield('title')</title>
+    @yield('meta')
+
     <!-- CSS Libraries -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,8 +18,6 @@
 
     <!-- Custom CSS and JS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <title>Portal UMKM Binaan DSA - IPB</title>
 
     <style>
         /* Header background transitions */

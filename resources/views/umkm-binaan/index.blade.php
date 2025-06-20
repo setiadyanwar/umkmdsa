@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('title', 'Daftar UMKM Binaan DSA IPB - Temukan UMKM Lokal Unggulan')
+
+@section('meta')
+    <meta name="description" content="Lihat daftar UMKM binaan DSA IPB. Temukan UMKM lokal unggulan, inspiratif, dan inovatif dari berbagai kategori. Dukung pertumbuhan UMKM Indonesia bersama DSA IPB.">
+    <meta name="keywords" content="UMKM Binaan, UMKM DSA IPB, UMKM Bogor, UMKM Indonesia, daftar UMKM, UMKM unggulan, pemberdayaan UMKM, inovasi UMKM, DSA IPB">
+    <meta property="og:title" content="Daftar UMKM Binaan DSA IPB - Temukan UMKM Lokal Unggulan">
+    <meta property="og:description" content="Lihat daftar UMKM binaan DSA IPB. Temukan UMKM lokal unggulan, inspiratif, dan inovatif dari berbagai kategori.">
+    <meta property="og:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Daftar UMKM Binaan DSA IPB - Temukan UMKM Lokal Unggulan">
+    <meta name="twitter:description" content="Lihat daftar UMKM binaan DSA IPB. Temukan UMKM lokal unggulan, inspiratif, dan inovatif dari berbagai kategori.">
+    <meta name="twitter:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
     $currentRoute = 'umkm-binaan';
 @endphp
@@ -11,13 +28,13 @@
         <div class="max-w-7xl mx-auto w-full px-4 sm:px-6">
             <!-- Banner -->
             <div class="relative h-[200px] sm:h-[250px] md:h-[300px] bg-cover bg-center rounded-lg overflow-hidden"
-                style="background-image: url('{{ asset('images/header-etalase.png') }}');">
+                style="background-image: url('{{ asset('images/header-umkm-binaan.png') }}');">
                 <!-- Overlay Content -->
                 <div class="relative z-10 flex items-center justify-center h-full">
                     <div class="text-center text-white px-4">
                         <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">UMKM Binaan DSA</h1>
                         <p class="text-sm sm:text-base md:text-lg text-gray-200 max-w-xl mx-auto">
-                            Jelajahi produk unik berkualitas tinggi dari pengusaha lokal yang penuh dedikasi
+                            Umkm terdaftar terprioritas
                         </p>
                     </div>
                 </div>
@@ -49,7 +66,7 @@
 
                             <!-- Filter Title -->
                             <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Filter</h3>
+                                <h2 class="text-lg font-semibold text-gray-900">Filter</h2>
                                 <button type="button" id="reset-filter" 
                                     class="text-sm text-blue-600 hover:text-blue-800 transition-colors cursor-pointer">Reset</button>
                             </div>
@@ -58,7 +75,7 @@
                             <div class="mb-6">
                                 <button type="button"
                                     class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                    <span>Kategori</span>
+                                    <h3>Kategori</h3>
                                     <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -262,7 +279,7 @@
 
                 <!-- Call to Action -->
                 <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-center text-white">
-                    <h3 class="text-2xl font-bold mb-4">Bergabung dengan UMKM Binaan DSA</h3>
+                    <h2 class="text-2xl font-bold mb-4">Bergabung dengan UMKM Binaan DSA</h2>
                     <p class="text-lg mb-6 opacity-90">
                         Dapatkan pendampingan dan dukungan untuk mengembangkan usaha Anda
                     </p>

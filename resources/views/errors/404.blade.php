@@ -1,7 +1,26 @@
 @extends('layouts.app')
+
+@section('title', '404 - Halaman Tidak Ditemukan | UMKM DSA IPB')
+
+@section('meta')
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="Halaman yang Anda cari tidak ditemukan. Silakan kembali ke halaman utama UMKM DSA IPB.">
+    <meta property="og:title" content="404 - Halaman Tidak Ditemukan | UMKM DSA IPB">
+    <meta property="og:description" content="Halaman yang Anda cari tidak ditemukan. Silakan kembali ke halaman utama UMKM DSA IPB.">
+    <meta property="og:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="404 - Halaman Tidak Ditemukan | UMKM DSA IPB">
+    <meta name="twitter:description" content="Halaman yang Anda cari tidak ditemukan. Silakan kembali ke halaman utama UMKM DSA IPB.">
+    <meta name="twitter:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
     $currentRoute = '404';
 @endphp
+
 @section('content')
 <div class="min-h-screen bg-white flex items-center justify-center px-4 py-32">
     <div class="max-w-2xl mx-auto text-center">

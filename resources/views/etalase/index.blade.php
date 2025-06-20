@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('title', 'Etalase Produk UMKM - Temukan Produk Lokal Berkualitas | DSA IPB')
+
+@section('meta')
+    <meta name="description" content="Jelajahi etalase produk UMKM binaan DSA IPB. Temukan produk lokal berkualitas, inovatif, dan inspiratif dari berbagai kategori. Dukung UMKM Indonesia bersama DSA IPB.">
+    <meta name="keywords" content="Etalase UMKM, Produk UMKM, UMKM Indonesia, UMKM Bogor, DSA IPB, produk lokal, marketplace UMKM, inovasi UMKM, pemberdayaan UMKM">
+    <meta property="og:title" content="Etalase Produk UMKM - Temukan Produk Lokal Berkualitas | DSA IPB">
+    <meta property="og:description" content="Jelajahi etalase produk UMKM binaan DSA IPB. Temukan produk lokal berkualitas, inovatif, dan inspiratif dari berbagai kategori.">
+    <meta property="og:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Etalase Produk UMKM - Temukan Produk Lokal Berkualitas | DSA IPB">
+    <meta name="twitter:description" content="Jelajahi etalase produk UMKM binaan DSA IPB. Temukan produk lokal berkualitas, inovatif, dan inspiratif dari berbagai kategori.">
+    <meta name="twitter:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
     $currentRoute = 'etalase';
 @endphp
@@ -49,7 +66,7 @@
 
                             <!-- Filter Title -->
                             <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Filter</h3>
+                                <h2 class="text-lg font-semibold text-gray-900">Filter</h2>
                                 <button type="button" id="reset-filter" 
                                     class="text-sm text-blue-600 hover:text-blue-800 transition-colors cursor-pointer">Reset</button>
                             </div>
@@ -58,7 +75,7 @@
                             <div class="mb-4 border-b border-gray-100 pb-4">
                                 <button type="button"
                                     class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                    <span>Kategori</span>
+                                    <h3>Kategori</h3>
                                     <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -88,7 +105,7 @@
                             <div class="mb-4 border-b border-gray-100 pb-4">
                                 <button type="button"
                                     class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                    <span>Harga</span>
+                                    <h3>Harga</h3>
                                     <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -115,7 +132,7 @@
                             <div class="mb-6">
                                 <button type="button"
                                     class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                    <span>Urutkan</span>
+                                    <h3>Urutkan</h3>
                                     <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -168,7 +185,7 @@
                         <!-- Header with Search -->
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                             <div>
-                                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Produk UMKM</h1>
+                                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Produk UMKM</h2>
                                 <p class="text-gray-600" id="results-count">
                                     {{ $products->total() }} hasil ditemukan
                                 </p>

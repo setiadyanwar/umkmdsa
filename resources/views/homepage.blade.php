@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Portal UMKM Binaan DSA - IPB')
+@section('title', 'Portal UMKM DSA IPB - Tumbuh Bersama Teknologi & Inovasi')
+
+@section('meta')
+    <meta name="description" content="Portal resmi UMKM binaan DSA IPB. Temukan produk unggulan, kisah inspiratif, pelatihan, dan peluang kolaborasi untuk pertumbuhan usaha kecil menengah berbasis teknologi dan inovasi.">
+    <meta name="keywords" content="UMKM, DSA IPB, UMKM Bogor, UMKM Indonesia, pelatihan UMKM, produk UMKM, digitalisasi UMKM, inovasi usaha kecil, pemberdayaan UMKM, DPMA IPB">
+    <meta property="og:title" content="Portal UMKM DSA IPB - Tumbuh Bersama Teknologi & Inovasi">
+    <meta property="og:description" content="Temukan produk unggulan, kisah inspiratif, pelatihan, dan peluang kolaborasi untuk pertumbuhan UMKM bersama DSA IPB.">
+    <meta property="og:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Portal UMKM DSA IPB - Tumbuh Bersama Teknologi & Inovasi">
+    <meta name="twitter:description" content="Temukan produk unggulan, kisah inspiratif, pelatihan, dan peluang kolaborasi untuk pertumbuhan UMKM bersama DSA IPB.">
+    <meta name="twitter:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
     $currentRoute = 'homepage';
 @endphp
@@ -165,6 +181,7 @@
 
     </section>
 
+    
     {{-- descriptions section --}}
     <section
         class="flex flex-col md:flex-row bg-white justify-content items-center max-w-7xl mx-auto px-4 sm:px-6 pt-16 md:pt-24">
@@ -185,9 +202,9 @@
                         </div>
                     </div>
 
-                    <h1 class="text-3xl font-bold text-gray-900 mb-6">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">
                         Apa itu DSA IPB?
-                    </h1>
+                    </h2>
 
                     <p class="text-gray-600 text-base leading-relaxed mb-8">
                         DSA (Digital Signature Algorithm) IPB adalah program pendampingan dan pemberdayaan UMKM
@@ -251,6 +268,7 @@
         </div>
     </section>
 
+
     {{-- Video section --}}
     <section class="justify-content items-center py-8 sm:py-12 max-w-7xl lg:py-14 mx-auto sm:px-6 mb-12">
         <div class="">
@@ -282,13 +300,14 @@
 
     </section>
 
+
     {{-- Product Highlight Section --}}
     <section class="py-8 sm:py-12 max-w-7xl lg:py-14 mx-auto sm:px-6 mb-16">
         <div class="container mx-auto max-w-7xl">
             <!-- Header Section -->
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 px-4">
                 <div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Produk Unggulan UMKM</h1>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Produk Unggulan UMKM</h2>
                     <p class="text-gray-600 text-lg">Jelajahi berbagai produk UMKM terdaftar</p>
                     <div class="w-16 h-1 bg-gradient-to-r from-blue-600 to-[#113EA1] mt-3 rounded-full"></div>
                 </div>
@@ -310,9 +329,9 @@
                         </div>
                         <div class="relative z-10 h-full flex flex-col justify-center px-6 lg:px-5">
                             <div class="text-center lg:text-left">
-                                <h2 class="text-white text-3xl sm:text-4xl font-bold leading-tight mb-2">
+                                <p class="text-white text-3xl sm:text-4xl font-bold leading-tight mb-2">
                                     500+ Produk Terdaftar
-                                </h2>
+                                </p>
                                 <p class="text-white text-lg mb-6">Daftarkan usahamu sekarang juga!</p>
                                 <button
                                     class="px-5 py-2.5 rounded-xl border-2 border-white text-white hover:bg-white hover:text-[#113EA1] transition-all duration-300 font-semibold cursor-pointer">
@@ -369,7 +388,6 @@
     </section>
 
 
-
     {{-- Benefit section --}}
     <section class="relative w-full bg-[#e6efff] overflow-hidden px-4 py-12 lg:py-16">
         <!-- Background Map -->
@@ -396,9 +414,9 @@
                         <img id="fadeImage" src="{{ asset('images/benefit.png') }}" alt="Benefit illustration"
                             class="max-w-full max-h-full object-contain transition-all duration-1000 ease-out opacity-0 transform scale-95"
                             onload="setTimeout(() => {
-                                                        this.classList.remove('opacity-0', 'scale-95');
-                                                        this.classList.add('opacity-100', 'scale-100');
-                                                    }, 100)" />
+                                this.classList.remove('opacity-0', 'scale-95');
+                                this.classList.add('opacity-100', 'scale-100');
+                            }, 100)" />
                     </div>
                 </div>
             </div>
@@ -498,7 +516,6 @@
     <section class="py-12 md:py-20 antialiased bg-gradient-to-br from-blue-50 to-purple-50">
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
 
-
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-gray-900">Seringkali ditanyakan</h2>
                 <div class="w-24 h-1 bg-[#113EA1] mx-auto mt-2 rounded-2xl"></div>
@@ -506,23 +523,17 @@
 
             <div x-data="{ selected: 1 }" class="space-y-3 max-w-2xl mx-auto">
                 <!-- FAQ Item 1 (Expanded by default) -->
-                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" :class="selected === 1 ?
-                                                                                    'border-2 border-[#113EA1] bg-white' :
-                                                                                    'border border-gray-200 bg-white'">
+                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" 
+                    :class="selected === 1 ? 'border-2 border-[#113EA1] bg-white' : 'border border-gray-200 bg-white'">
                     <button @click="selected === 1 ? selected = null : selected = 1"
                         class="flex items-center justify-between w-full px-5 py-4 text-left cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors">
-                        <span class="text-gray-800 font-medium text-sm flex-1">Apa itu UMKM
-                            DSA?</span>
+                        <h3 class="text-gray-800 font-medium text-sm flex-1">Apa itu UMKM
+                            DSA?</h3>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-3 border-2"
-                            :class="{
-                                                                                            'bg-[#113EA1] border-[#113EA1]': selected === 1,
-                                                                                            'bg-white shadow-xl': selected !== 1
-                                                                                        }">
-                            <svg class="w-4 h-4 transition-transform duration-200" :class="{
-                                                                                                'rotate-0 text-white': selected === 1,
-                                                                                                '-rotate-90 text-[#113EA1]': selected !== 1
-                                                                                            }" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            :class="{ 'bg-[#113EA1] border-[#113EA1]': selected === 1, 'bg-white shadow-xl': selected !== 1 }">
+                            <svg class="w-4 h-4 transition-transform duration-200" 
+                                :class="{ 'rotate-0 text-white': selected === 1, '-rotate-90 text-[#113EA1]': selected !== 1 }" 
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
@@ -537,24 +548,18 @@
                 </div>
 
                 <!-- FAQ Item 2 -->
-                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" :class="selected === 2 ?
-                                                                                    'border-2 border-[#113EA1] bg-white' :
-                                                                                    'border border-gray-200 bg-white'">
+                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" 
+                    :class="selected === 2 ? 'border-2 border-[#113EA1] bg-white' : 'border border-gray-200 bg-white'">
                     <button @click="selected === 2 ? selected = null : selected = 2"
                         class="flex items-center justify-between w-full px-5 py-4 text-left cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors">
-                        <span class="text-gray-800 font-medium text-sm flex-1">Bagaimana cara
+                        <h3 class="text-gray-800 font-medium text-sm flex-1">Bagaimana cara
                             mendaftar
-                            UMKM DSA?</span>
+                            UMKM DSA?</h3>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-3 border-2"
-                            :class="{
-                                                                                            'bg-[#113EA1] border-[#113EA1]': selected === 2,
-                                                                                            'bg-white shadow-xl': selected !== 2
-                                                                                        }">
-                            <svg class="w-4 h-4 transition-transform duration-200" :class="{
-                                                                                                'rotate-0 text-white': selected === 2,
-                                                                                                '-rotate-90 text-[#113EA1]': selected !== 2
-                                                                                            }" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            :class="{ 'bg-[#113EA1] border-[#113EA1]': selected === 2, 'bg-white shadow-xl': selected !== 2 }">
+                            <svg class="w-4 h-4 transition-transform duration-200" 
+                                :class="{ 'rotate-0 text-white': selected === 2, '-rotate-90 text-[#113EA1]': selected !== 2 }" 
+                                fill="none" aria-activedescendant=""viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
@@ -565,26 +570,19 @@
                     </div>
                 </div>
 
-
                 <!-- FAQ Item 3 -->
-                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" :class="selected === 3 ?
-                                                                                    'border-2 border-[#113EA1] bg-white' :
-                                                                                    'border border-gray-200 bg-white'">
+                <div class="rounded-lg shadow-sm overflow-hidden transition-all duration-200" 
+                    :class="selected === 3 ? 'border-2 border-[#113EA1] bg-white' : 'border border-gray-200 bg-white'">
                     <button @click="selected === 3 ? selected = null : selected = 3"
                         class="flex items-center justify-between w-full px-5 py-4 text-left cursor-pointer focus:outline-none hover:bg-gray-50 transition-colors">
-                        <span class="text-gray-800 font-medium text-sm flex-1">Apa manfaat
+                        <h3 class="text-gray-800 font-medium text-sm flex-1">Apa manfaat
                             menggunakan
-                            tanda tangan digital?</span>
+                            tanda tangan digital?</h3>
                         <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ml-3 border-2"
-                            :class="{
-                                                                                            'bg-[#113EA1] border-[#113EA1]': selected === 3,
-                                                                                            'bg-white shadow-xl': selected !== 3
-                                                                                        }">
-                            <svg class="w-4 h-4 transition-transform duration-200" :class="{
-                                                                                                'rotate-0 text-white': selected === 3,
-                                                                                                '-rotate-90 text-[#113EA1]': selected !== 3
-                                                                                            }" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            :class="{ 'bg-[#113EA1] border-[#113EA1]': selected === 3, 'bg-white shadow-xl': selected !== 3 }">
+                            <svg class="w-4 h-4 transition-transform duration-200" 
+                                :class="{ 'rotate-0 text-white': selected === 3, '-rotate-90 text-[#113EA1]': selected !== 3 }" 
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
@@ -596,8 +594,6 @@
                     </div>
 
                 </div>
-
-
             </div>
     </section>
 
@@ -625,6 +621,5 @@
         <img src="{{ asset('images/team.png') }}" alt="Team"
             class="absolute bottom-[-20px] right-0 max-h-[380px] scale-110 object-contain z-20 pointer-events-none">
     </section>
-
 
 @endsection

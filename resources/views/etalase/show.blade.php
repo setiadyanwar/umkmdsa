@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('title', $product->name . ' - ' . $product->umkm->name . ' | Etalase UMKM DSA IPB')
+
+@section('meta')
+    <meta name="description" content="{{ Str::limit(strip_tags($product->description), 155) }}">
+    <meta name="keywords" content="{{ $product->category->name ?? '' }}, {{ $product->umkm->name }}, UMKM, Produk UMKM, DSA IPB, {{ $product->name }}">
+    <meta property="og:title" content="{{ $product->name }} - {{ $product->umkm->name }} | Etalase UMKM DSA IPB">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($product->description), 155) }}">
+    <meta property="og:image" content="{{ $product->primaryImage ? asset('storage/' . $product->primaryImage->image_url) : asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $product->name }} - {{ $product->umkm->name }} | Etalase UMKM DSA IPB">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($product->description), 155) }}">
+    <meta name="twitter:image" content="{{ $product->primaryImage ? asset('storage/' . $product->primaryImage->image_url) : asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
     $currentRoute = 'etalase';
 @endphp

@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('title', $umkm->name . ' - UMKM Binaan DSA IPB')
+
+@section('meta')
+    <meta name="description" content="{{ Str::limit(strip_tags($umkm->description ?? 'Profil dan produk unggulan dari ' . $umkm->name . ', UMKM binaan DSA IPB.'), 155) }}">
+    <meta name="keywords" content="{{ $umkm->category->name ?? '' }}, {{ $umkm->city }}, {{ $umkm->province }}, UMKM, DSA IPB, {{ $umkm->name }}">
+    <meta property="og:title" content="{{ $umkm->name }} - UMKM Binaan DSA IPB">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($umkm->description ?? 'Profil dan produk unggulan dari ' . $umkm->name . ', UMKM binaan DSA IPB.'), 155) }}">
+    <meta property="og:image" content="{{ $umkm->logo ? asset('storage/' . $umkm->logo) : asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $umkm->name }} - UMKM Binaan DSA IPB">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($umkm->description ?? 'Profil dan produk unggulan dari ' . $umkm->name . ', UMKM binaan DSA IPB.'), 155) }}">
+    <meta name="twitter:image" content="{{ $umkm->logo ? asset('storage/' . $umkm->logo) : asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
     $currentRoute = 'umkm-binaan';
 @endphp
@@ -174,7 +191,7 @@
                     </div> -->
 
                     {{-- Featured Products --}}
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Mungkin Kamu Suka</h3>
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">Mungkin Kamu Suka</h2>
                     <div class="h-full overflow-x-auto scrollbar-hide" style="scroll-snap-type: x mandatory;">
                         @if($featuredProducts->isNotEmpty())
                             <div class="h-full flex items-stretch gap-4 lg:gap-6 p-2">
@@ -252,7 +269,7 @@
                                         <div class="mb-4 border-b border-gray-100 pb-4">
                                             <button type="button"
                                                 class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                                <span>Kategori</span>
+                                                <h4>Kategori</h4>
                                                 <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                                     stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -282,7 +299,7 @@
                                         <div class="mb-4 border-b border-gray-100 pb-4">
                                             <button type="button"
                                                 class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                                <span>Harga</span>
+                                                <h4>Harga</h4>
                                                 <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                                     stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -309,7 +326,7 @@
                                         <div class="mb-6">
                                             <button type="button"
                                                 class="accordion-button flex w-full justify-between items-center text-sm font-medium text-gray-700 mb-3 hover:text-gray-900 transition-colors cursor-pointer">
-                                                <span>Urutkan</span>
+                                                <h4>Urutkan</h4>
                                                 <svg class="w-4 h-4 accordion-icon transition-transform duration-200" fill="none"
                                                     stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -362,7 +379,7 @@
                                     <!-- Header with Search -->
                                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
                                         <div>
-                                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Produk UMKM</h1>
+                                            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">Produk UMKM</h2>
                                             <p class="text-gray-600" id="results-count">
                                                 {{ $products->total() }} hasil ditemukan
                                             </p>
@@ -478,13 +495,13 @@
 
                                 {{-- Kategori Usaha --}}
                                 @if ($umkm->category?->name)
-                                    <h4 class="font-semibold mb-1 text-gray-800">Kategori Usaha</h4>
+                                    <h3 class="font-semibold mb-1 text-gray-800">Kategori Usaha</h3>
                                     <p class="text-gray-600 mb-4">{{ $umkm->category->name }}</p>
                                 @endif
 
                                 {{-- Informasi Kontak --}}
                                 @if ($umkm->phone || $umkm->email || $umkm->website)
-                                    <h4 class="font-semibold mb-1 text-gray-800">Informasi Kontak</h4>
+                                    <h3 class="font-semibold mb-1 text-gray-800">Informasi Kontak</h3>
                                     <div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-2 text-gray-600 mb-6">
                                         @if ($umkm->phone)
                                             <span class="pr-2">Telepon</span>
@@ -509,7 +526,7 @@
 
                                 {{-- Sosial Media --}}
                                 @if ($umkm->instagram || $umkm->tiktok || $umkm->facebook)
-                                    <h4 class="font-semibold mb-1 text-gray-800">Sosial Media</h4>
+                                    <h3 class="font-semibold mb-1 text-gray-800">Sosial Media</h3>
                                     <div class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-2 text-gray-600">
                                         @if ($umkm->instagram)
                                             <span class="pr-2">Instagram</span>

@@ -1,7 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Formulir Pendaftaran UMKM Binaan DSA IPB')
+
+@section('meta')
+    <meta name="description" content="Daftarkan usaha Anda menjadi bagian dari UMKM binaan DSA IPB. Isi formulir pendaftaran dan kembangkan bisnis Anda bersama komunitas UMKM unggulan.">
+    <meta name="keywords" content="daftar UMKM, pendaftaran UMKM, UMKM DSA IPB, formulir UMKM, bergabung UMKM, UMKM Bogor, UMKM Indonesia">
+    <meta property="og:title" content="Formulir Pendaftaran UMKM Binaan DSA IPB">
+    <meta property="og:description" content="Daftarkan usaha Anda menjadi bagian dari UMKM binaan DSA IPB. Isi formulir pendaftaran dan kembangkan bisnis Anda bersama komunitas UMKM unggulan.">
+    <meta property="og:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="UMKM DSA IPB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Formulir Pendaftaran UMKM Binaan DSA IPB">
+    <meta name="twitter:description" content="Daftarkan usaha Anda menjadi bagian dari UMKM binaan DSA IPB. Isi formulir pendaftaran dan kembangkan bisnis Anda bersama komunitas UMKM unggulan.">
+    <meta name="twitter:image" content="{{ asset('images/dpma-logo-dark.png') }}">
+@endsection
+
 @php
-    use Carbon\Carbon;
     $currentRoute = 'daftar-usaha';
     $expiresAt = $expiresAt ?? null;
     $tokenStatus = $tokenStatus ?? 'none';
@@ -295,9 +311,9 @@
                     <div class="flex flex-col gap-6">
                         <div class="flex flex-col gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200">
                             <!-- Contact Information -->
-                            <h3 class="text-lg font-medium text-gray-700">
+                            <h2 class="text-lg font-medium text-gray-700">
                                 Informasi Kontak
-                            </h3>
+                            </h2>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block font-medium text-gray-700 mb-2">
@@ -369,7 +385,7 @@
 
                             <!-- File Upload -->
                             <div class="mb-8">
-                                <h3 class="text-lg font-medium text-gray-700">Upload lampiran</h3>
+                                <h2 class="text-lg font-medium text-gray-700">Upload lampiran</h2>
                                 <p class="text-sm text-gray-400 mb-4">Opsional, unggah lampiran bukti usaha seperti NIB, Haki atau dokumen lainnya</p>
                                 <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
                                     <div class="flex flex-col items-center">
