@@ -6,7 +6,7 @@ use App\Models\ProductCategory;
 use DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Str;
+use Illuminate\Support\Str;
 
 class ProductCategorySeeder extends Seeder
 {
