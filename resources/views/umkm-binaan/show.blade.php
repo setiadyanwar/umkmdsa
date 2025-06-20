@@ -77,12 +77,12 @@
                             {{-- Action Buttons --}}
                             <div class="flex flex-col sm:flex-row gap-3 w-full sm:max-w-md">
                                 <button id="contact-umkm"
-                                    class="cursor-pointer w-full flex items-center justify-center space-x-3 px-6 py-3 sm:px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 bg-[#113EA1] text-white hover:bg-blue-800">
+                                    class="cursor-pointer w-full flex items-center justify-center space-x-3 px-6 py-3 sm:px-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 bg-[#113EA1] text-white hover:bg-blue-800">
                                     <i class="fab fa-whatsapp text-lg sm:text-xl"></i>
                                     <span class="font-medium text-sm sm:text-base">Hubungi Penjual</span>
                                 </button>
                                 <button id="share-umkm"
-                                    class="cursor-pointer w-full flex items-center justify-center space-x-3 px-6 py-3 sm:px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 bg-white/90 text-[#113EA1] border border-[#113EA1] backdrop-blur-sm hover:bg-white">
+                                    class="cursor-pointer w-full flex items-center justify-center space-x-3 px-6 py-3 sm:px-8 rounded-2xl transition-all duration-300 transform hover:-translate-y-0.5 bg-white/90 text-[#113EA1] border border-[#113EA1] backdrop-blur-sm hover:bg-white">
                                     <i class="fas fa-share-alt text-sm sm:text-lg"></i>
                                     <span class="font-medium text-sm sm:text-base">Bagikan Profile</span>
                                 </button>
@@ -252,16 +252,16 @@
                                 {{-- Filter Sidebar --}}
                                 <div class="w-full md:w-72 flex-shrink-0">
                                     <!-- Filter Form -->
-                                    <form method="GET" 
-                                        class="filter-form bg-white rounded-xl shadow-sm border border-gray-100 p-4 
+                                    <form method="GET"
+                                        class="filter-form bg-white rounded-xl shadow-sm border border-gray-100 p-4
                                             hidden md:block md:sticky md:top-4
-                                            transition-all duration-300 ease-in-out" 
+                                            transition-all duration-300 ease-in-out"
                                         id="filter-form">
 
                                         <!-- Filter Title -->
                                         <div class="flex justify-between items-center mb-4">
                                             <h3 class="text-lg font-semibold text-gray-900">Filter</h3>
-                                            <button type="button" id="reset-filter" 
+                                            <button type="button" id="reset-filter"
                                                 class="text-sm text-blue-600 hover:text-blue-800 transition-colors cursor-pointer">Reset</button>
                                         </div>
 
@@ -311,11 +311,11 @@
                                                 <div class="flex items-center justify-between mb-2">
                                                     <div class="w-full flex items-center gap-2 text-sm">
                                                         <input type="number" name="price_min" min="0" placeholder="Min"
-                                                            class="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
+                                                            class="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                                             value="{{ request('price_min') }}">
                                                         <span class="text-gray-500">-</span>
                                                         <input type="number" name="price_max" min="0" placeholder="Max"
-                                                            class="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" 
+                                                            class="flex-1 min-w-0 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                                                             value="{{ request('price_max') }}">
                                                     </div>
                                                 </div>
@@ -361,7 +361,7 @@
 
                                         <!-- Apply Filter Button -->
                                         <div class="space-y-3">
-                                            <button type="submit" 
+                                            <button type="submit"
                                                 class="w-full bg-[#113EA1] text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium cursor-pointer">
                                                 Terapkan Filter
                                             </button>
@@ -400,7 +400,7 @@
                                             </button>
 
                                             @if(request('search'))
-                                                <button type="button" id="clear-search" 
+                                                <button type="button" id="clear-search"
                                                     class="absolute right-8 top-2.5 p-1 hover:bg-gray-100 rounded-full transition-colors">
                                                     <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -428,8 +428,8 @@
                                                         <div class="mb-2 flex justify-center">
                                                             <div class="w-full aspect-square bg-gray-50 rounded-t-2xl overflow-hidden">
                                                                 <img src="{{ $product->primaryImage ? asset('storage/' . $product->primaryImage->image_url) : asset('images/default-image.png') }}"
-                                                                    alt="{{ $product->name }}" 
-                                                                    class="w-full h-full object-cover" 
+                                                                    alt="{{ $product->name }}"
+                                                                    class="w-full h-full object-cover"
                                                                     loading="lazy" />
                                                             </div>
                                                         </div>
@@ -468,7 +468,7 @@
                                             </div>
                                             <h3 class="text-lg font-semibold text-gray-900 mb-2">Produk tidak ditemukan</h3>
                                             <p class="text-gray-600 mb-4">Coba ubah kata kunci pencarian atau filter yang digunakan</p>
-                                            <button type="button" onclick="window.location.href='{{ route('umkm-binaan.show', $umkm->slug) }}'" 
+                                            <button type="button" onclick="window.location.href='{{ route('umkm-binaan.show', $umkm->slug) }}'"
                                                 class="bg-[#113EA1] text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
                                                 Reset Pencarian
                                             </button>
@@ -653,11 +653,11 @@
             // Function to determine which tab should be active
             function getActiveTab() {
                 const urlParams = new URLSearchParams(window.location.search);
-                
+
                 // Check if any filter/search parameters exist that should open the "produk" tab
                 const filterParams = ['search', 'category', 'price_min', 'price_max', 'sort'];
                 const hasFilterParams = filterParams.some(param => urlParams.has(param) && urlParams.get(param) !== '');
-                
+
                 return hasFilterParams ? 'produk' : 'utama';
             }
 
@@ -731,7 +731,7 @@
             function resetFilters() {
                 const currentParams = new URLSearchParams(window.location.search);
                 const search = currentParams.get('search');
-                
+
                 // Use the current pathname (which includes the UMKM slug)
                 const url = new URL(window.location.pathname, window.location.origin);
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Guest\UmkmFormController;
 use App\Models\Product;
 use App\Models\Testimonial;
 use App\Models\Umkm;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
